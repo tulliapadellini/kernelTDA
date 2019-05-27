@@ -1,5 +1,5 @@
 ---
-title: "kernelTDA-vignette"
+title: "kernelTDA - Kernel methods fvignette"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{kernelTDA-vignette}

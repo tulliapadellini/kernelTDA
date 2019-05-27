@@ -1,8 +1,8 @@
 Package: kernelTDA
 Type: Package
-Title: Kernels for Persistence Diagrams
+Title: Kernel Methods for Persistence Diagrams.
 Version: 1.0
-Date: 2019-04-01
+Date: 2019-06-01
 Authors@R: c(
     person("Tullia", "Padellini", email = "tullia.padellini@uniroma1.it", role = c("aut", "cre")), 
     person("Francesco", "Palini", role = "aut"),
@@ -11,7 +11,7 @@ Author: Tullia Padellini [aut, cre],
   Francesco Palini [aut],
   Pierpaolo Brutti [ctb]
 Maintainer: Tullia Padellini <tullia.padellini@uniroma1.it>
-Description: Computes Kernels for Persistence Diagram and solves SVM in the case of indefinite Kernels.
+Description: Kernel methods for Persistence Diagrams.
 License: GPL-3
 Imports: Rcpp (>= 1.0.1), RcppEigen (>= 0.3.3.5.0), kernlab, mvtnorm
 Suggests: 
