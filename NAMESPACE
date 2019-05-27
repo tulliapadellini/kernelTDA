@@ -1,0 +1,11 @@
+useDynLib(kernelTDA)
+#exportPattern("^[[:alpha:]]+")
+
+export("wasserstein_distance",
+       "gaus.kernel",
+       "lapl.kernel",
+       "sw.kernel", 
+       "pss.kernel",
+       "wass.kernel",
+       "pf.kernel", 
+       "pers.image")

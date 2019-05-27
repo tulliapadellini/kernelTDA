@@ -1,0 +1,19 @@
+---
+title: "kernelTDA-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{kernelTDA-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+The `kernelTDA` package provides an `R` implementation for the most popular kernel to be used in the space of Persistence Diagram. 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(kernelTDA)
+```
