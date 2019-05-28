@@ -174,7 +174,7 @@ sw.k <- function(x, y, dimension, h, M){
   }
   
   VV1 = apply(V1, 2, sort, decreasing = F)
-  VV2 = apply(V1, 2, sort, decreasing = F)
+  VV2 = apply(V2, 2, sort, decreasing = F)
   
   SW = step.theta * abs(VV1 - VV2)
   
