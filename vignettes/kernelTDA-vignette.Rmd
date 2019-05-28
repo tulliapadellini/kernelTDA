@@ -1,12 +1,30 @@
 ---
-title: "kernelTDA - Kernel methods fvignette"
+title: "kernelTDA - Vignette"
+subtitle: "Statistical Learning with Kernels for Topological Data Analysis"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{kernelTDA-vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-The `kernelTDA` package provides an `R` implementation for the most popular kernel to be used in the space of Persistence Diagram. 
+
+Topological Data Analysis (TDA) is a relatively new branch of statistics devoted to the estimation of the connectivity structure of data, via means of topological invariants such as (Persistent) Homology Groups. Topology provides a highly interpretable characterization of data, hence TDA has seen an impressive growth in the last couple of years. 
+
+
+While several inference-ready tools have been developed in the framework of TDA, their popularity The hype on the theoretical side however, has not been matched by the same popularity in applications. 
+The `kernelTDA` package aims at filling this gap, ... tools, with a special emphasis on kernels. The main contribution of `kernelTDA` is in fact to provide an `R` implementation of the most popular kernels to be used in the space of Persistence Diagrams:
+
+- Persistence Scale Space Kernel
+- Gaussian Weighted Kernel
+- Sliced Wasserstein Kernel
+- Fisher Information Kerner
+- Geodesic Kernels
+
+In addition, it also contains an `R` version of the Persistence Images, and a port to the `C++` library `HERA`, which allows to compute any Wasserstein distance between Persistence Diagrams. 
+
+
+## Topological Kernels 
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
