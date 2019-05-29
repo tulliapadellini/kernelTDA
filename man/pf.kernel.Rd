@@ -4,7 +4,7 @@
 \alias{pf.kernel}
 \title{Compute Persistence Fisher Kernel (PFK)}
 \usage{
-pf.kernel(d1, d2 = NULL, h, dimansion, sigma)
+pf.kernel(d1, d2 = NULL, h, dimension, sigma)
 }
 \arguments{
 \item{d1}{A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams}
@@ -13,9 +13,9 @@ pf.kernel(d1, d2 = NULL, h, dimansion, sigma)
 
 \item{h}{bandwidth of the PFK}
 
-\item{sigma}{standard deviation of Gaussian Kernel used to}
-
 \item{dimension}{The dimension of the topological feature (0 for connected components, 1 for cycles etc)}
+
+\item{sigma}{standard deviation of Gaussian Kernel used to}
 }
 \value{
 If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the PFK computed in (\code{d1}[[i]], \code{d2}[[j]]),

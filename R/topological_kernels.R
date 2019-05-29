@@ -71,6 +71,7 @@ lapl.kernel <- function (d1, d2 = NULL, h, dimension, p)
 #' @param p order of the p-Wasserstein distance
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the WK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the WK computed in (\code{d1}, \code{d2}).
+#' @export
 wass.kernel <- function (d1, d2 = NULL, h, dimension, p)
 {
   

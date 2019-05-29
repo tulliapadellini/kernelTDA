@@ -14,11 +14,10 @@ Topological Data Analysis (TDA) is a relatively new branch of statistics devoted
 While several inference-ready tools have been developed in the framework of TDA, their popularity The hype on the theoretical side however, has not been matched by the same popularity in applications. 
 The `kernelTDA` package aims at filling this gap by providing --- tools, with a special emphasis on kernels. The main contribution of `kernelTDA` is in fact to provide an `R` implementation of the most popular kernels to be used in the space of Persistence Diagrams:
 
-- Persistence Scale Space Kernel
-- Gaussian Weighted Kernel
-- Sliced Wasserstein Kernel
-- Fisher Information Kerner
-- Geodesic Kernels
+- Persistence Scale Space Kernel [@]
+- Sliced Wasserstein Kernel [@]
+- Fisher Information Kerner [@]
+- Geodesic Kernels [@]
 
 In addition, it also contains an `R` version of the Persistence Images, and a port to the `C++` library `HERA`, which allows to compute any Wasserstein distance between Persistence Diagrams. 
 
