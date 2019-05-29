@@ -176,9 +176,9 @@ sw.k <- function(x, y, dimension, h, M){
   VV1 = apply(V1, 2, sort, decreasing = F)
   VV2 = apply(V2, 2, sort, decreasing = F)
   
-  SW = step.theta * abs(VV1 - VV2)
+  SW = step.theta * sum(abs(VV1 - VV2))
   
-  return(exp( - pi*sum(SW)/h))
+  return(exp( - pi*SW/h))
 }
 
 
@@ -239,7 +239,7 @@ pf.k <- function(x, y, dimension, h, sigma)
   
   fd = acos(ff1%*%ff2)
 
- return(1/h * fd)
+ return(exp(- 1/h * fd))
 
 }
 
@@ -254,7 +254,7 @@ pf.k <- function(x, y, dimension, h, sigma)
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the PFK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the PFK computed in (\code{d1}, \code{d2})
 #' @export
-pf.kernel <- function(d1, d2 = NULL, h, dimansion, sigma){
+pf.kernel <- function(d1, d2 = NULL, h, dimension, sigma){
   if(!is.null(d2)) {
     out = pf.k(d1, d2, h = h, dimension=dimension, sigma = sigma)
   }
