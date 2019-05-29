@@ -159,8 +159,8 @@ sw.k <- function(x, y, dimension, h, M){
   dd1 = rbind( d1, cbind(rep(dimension, n2), p2, p2))
   dd2 = rbind( d2, cbind(rep(dimension, n1), p1, p1))
   
-  angles = seq(-pi/2, pi/2, length.out = M +1)
-  step.theta = pi/M
+  angles = seq(-pi/2, pi/2, length.out = M)
+#  step.theta = 1/M
   
   theta = cbind(cos(angles), sin(angles))
   
@@ -176,9 +176,10 @@ sw.k <- function(x, y, dimension, h, M){
   VV1 = apply(V1, 2, sort, decreasing = F)
   VV2 = apply(V2, 2, sort, decreasing = F)
   
-  SW = step.theta * sum(abs(VV1 - VV2))
+  SW = abs(VV1 - VV2)/M
+  print(sum(SW))
   
-  return(exp( - pi*SW/h))
+  return(exp( - sum(SW)/h))
 }
 
 
@@ -265,8 +266,7 @@ pf.kernel <- function(d1, d2 = NULL, h, dimension, sigma){
     out   = outer(d.idx,d.idx, k.fun)
   }
   return(out)
-  
-  
+
 }
 
 
