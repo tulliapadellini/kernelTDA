@@ -7,6 +7,7 @@ L2.wass <- function(d1, d2, h, dimension, pp){
   
 }
 
+
 #' Compute L_{2} Geodesic Gaussian Kernel (GGK)
 #'
 #' @param d1 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams
