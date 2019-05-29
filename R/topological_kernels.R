@@ -150,8 +150,8 @@ sw.k <- function(x, y, dimension, h, M){
   d2 = matrix(y[y[,1]==dimension,], ncol = 3)
   
   
-  p1 = (d1[,3]-d1[,2])/2
-  p2 = (d2[,3]-d2[,2])/2
+  p1 = (d1[,3]+d1[,2])/2
+  p2 = (d2[,3]+d2[,2])/2
   
   n1 = nrow(d1)
   n2 = nrow(d2)
@@ -159,7 +159,7 @@ sw.k <- function(x, y, dimension, h, M){
   dd1 = rbind( d1, cbind(rep(dimension, n2), p2, p2))
   dd2 = rbind( d2, cbind(rep(dimension, n1), p1, p1))
   
-  angles = seq(-pi/2, pi/2, length.out = M)
+  angles = seq(-pi/2, pi/2, length.out = M+1)[1:M]
 #  step.theta = 1/M
   
   theta = cbind(cos(angles), sin(angles))
@@ -177,8 +177,6 @@ sw.k <- function(x, y, dimension, h, M){
   VV2 = apply(V2, 2, sort, decreasing = F)
   
   SW = abs(VV1 - VV2)/M
-  print(sum(SW))
-  
   return(exp( - sum(SW)/h))
 }
 
