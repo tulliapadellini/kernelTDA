@@ -1,7 +1,7 @@
 Package: kernelTDA
 Type: Package
 Title: Kernel Methods for Persistence Diagrams.
-Version: 1.0
+Version: 1.0.0
 Date: 2019-06-01
 Authors@R: c(
     person("Tullia", "Padellini", email = "tullia.padellini@uniroma1.it", role = c("aut", "cre")), 
@@ -9,7 +9,7 @@ Authors@R: c(
     person("Pierpaolo", "Brutti", role = "ctb")) 
 Author: Tullia Padellini [aut, cre],
   Francesco Palini [aut],
-  Pierpaolo Brutti [ctb]
+  Pierpaolo Brutti [ctb]. The included library HERA is authored by Michael Kerber, Dmitriy Morozov, and Arnur Nigmetov
 Maintainer: Tullia Padellini <tullia.padellini@uniroma1.it>
 Description: Kernel methods for Persistence Diagrams.
 License: GPL-3

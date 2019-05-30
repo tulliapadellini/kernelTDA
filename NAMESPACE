@@ -2,6 +2,7 @@
 
 export(gaus.kernel)
 export(lapl.kernel)
+export(pers.image)
 export(pf.kernel)
 export(pss.kernel)
 export(sw.kernel)

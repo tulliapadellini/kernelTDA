@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Topological Data Analysis (TDA) is a relatively new branch of statistics devoted to the estimation of the connectivity structure of data, via means of topological invariants such as (Persistent) Homology Groups. Topology provides a highly interpretable characterization of data, hence TDA has seen an impressive growth in the last couple of years. 
+Topological Data Analysis (TDA) is a relatively new branch of statistics devoted to the estimation of the connectivity structure of data, via means of topological invariants such as (Persistent) Homology Groups. Topology provides a highly interpretable characterization of data, making TDA ever more popular in a time when data are becoming the era of big and complex hence TDA has seen an impressive growth in the last couple of years. 
 
 
 While several inference-ready tools have been developed in the framework of TDA, their popularity The hype on the theoretical side however, has not been matched by the same popularity in applications. 

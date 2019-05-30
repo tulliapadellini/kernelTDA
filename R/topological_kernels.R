@@ -62,7 +62,7 @@ lapl.kernel <- function (d1, d2 = NULL, h, dimension, p)
 
 # Linfty Wasserstein Kernel -----------------------------------------------
 
-#' Compute L_{\infty}} Wasserstein Kernel (WK)
+#' Compute a Wasserstein Kernel (WK)
 #'
 #' @param d1 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams
 #' @param d2 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).

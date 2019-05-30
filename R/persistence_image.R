@@ -7,6 +7,7 @@
 #' @param h Standard deviation of the Gaussian
 #' @return a \code{nbins}x\code{nbins} matrix containing the Persistence Image
 #' @references 
+#' @export
 pers.image <- function(d1, nbins, dimension, h){
   
   d1 = d1[d1[,1]==dimension, 2:3, drop = F]
