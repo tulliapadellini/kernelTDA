@@ -13,7 +13,7 @@ Author: Tullia Padellini [aut, cre],
 Maintainer: Tullia Padellini <tullia.padellini@uniroma1.it>
 Description: Provides tools for exploiting topological information into standard Statistical Learning algorithms. 
   To this aim, this package contains the most popular kernels defined on the space of Persistence Diagrams, and Persistence Images.
-  Additionally, it allows to compute Wasserstein distance with an arbitrary ground metric with an R interface for the C++ library 'HERA' (https://bitbucket.org/grey_narn/hera/src/master/)
+  Additionally, it allows to compute Wasserstein distance with an arbitrary ground metric with an R interface for the C++ library 'HERA' (https://bitbucket.org/grey_narn/hera/src/master/).
 Imports: Rcpp (>= 1.0.1), RcppEigen (>= 0.3.3.5.0), kernlab, mvtnorm
 Suggests: 
     TDA,
