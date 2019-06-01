@@ -14,15 +14,28 @@ Topological Data Analysis (TDA) is a relatively new branch of statistics devoted
 While several inference-ready tools have been developed in the framework of TDA, they are still o The hype on the theoretical side however, has not been matched by the same popularity in applications. 
 The `kernelTDA` package aims at filling this gap by providing --- tools, with a special emphasis on kernels. The main contribution of `kernelTDA` is in fact to provide an `R` implementation of the most popular kernels to be used in the space of Persistence Diagrams:
 
-- Persistence Scale Space Kernel [@]
-- Sliced Wasserstein Kernel [@]
-- Fisher Information Kerner [@]
-- Geodesic Kernels [@]
+* [Persistence Scale Space Kernel](http://openaccess.thecvf.com/content_cvpr_2015/papers/Reininghaus_A_Stable_Multi-Scale_2015_CVPR_paper.pdf)
+* [Sliced Wasserstein Kernel](https://dl.acm.org/citation.cfm?id=3305450)
+* [Persistence Fisher Kernel](http://papers.nips.cc/paper/8205-persistence-fisher-kernel-a-riemannian-manifold-kernel-for-persistence-diagrams.pdf)
+* [Geodesic Wasserstein Kernel(s)](https://arxiv.org/abs/1709.07100)
+* [Persistence Images](http://www.jmlr.org/papers/volume18/16-337/16-337.pdf)
 
-In addition, it also contains an `R` version of the Persistence Images, and a port to the `C++` library `HERA`, which allows to compute any Wasserstein distance between Persistence Diagrams. 
 
+In addition, it also contains an `R` interface to the `C++` library [HERA](https://bitbucket.org/grey_narn/hera/src/master/), which allows to compute any Wasserstein distance between Persistence Diagrams. 
 
-## Topological Kernels 
+# Preliminaries - some definitions
+
+Before showing how to use the functions contained in this package, we briefly recap how they are defined, starting from the most common distance between Persistence Diagrams, i.e. the $L_p$ $q-$Wasserstein distance.
+
+Given two Persistence Diagrams $D_1$, $D_2$, we define the as 
+
+ 
+* [Persistence Scale Space Kernel](http://openaccess.thecvf.com/content_cvpr_2015/papers/Reininghaus_A_Stable_Multi-Scale_2015_CVPR_paper.pdf)
+* [Sliced Wasserstein Kernel](https://dl.acm.org/citation.cfm?id=3305450)
+* [Persistence Fisher Kernel](http://papers.nips.cc/paper/8205-persistence-fisher-kernel-a-riemannian-manifold-kernel-for-persistence-diagrams.pdf)
+* [Geodesic Wasserstein Kernel(s)](https://arxiv.org/abs/1709.07100)
+* [Persistence Images](http://www.jmlr.org/papers/volume18/16-337/16-337.pdf)
+
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -31,6 +44,100 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+# The package - some toy examples 
+
+Let us consider two generating models for our data:
+
+* **Model 1:** a uniform distribution on the unit radius circle;
+
+* **Model 2:** a uniform distribution on the unit square [0,1] x [0,1].
+
+The following code produces two samples of $n=100$ observations from the different models.
+```{r toy_examples }
+library(TDA)
+x1 = circleUnif(100)
+x2 = cbind(runif(100), runif(100))
+```
+Using the package [TDA]() we can build a Persistence Diagram from each sample, as follows:
+```{r}
+diag1 = ripsDiag(x1, maxdimension = 1, maxscale = 1)$diagram
+diag2 = ripsDiag(x2, maxdimension = 1, maxscale = 1)$diagram
+```
+
+Figure shows us the two sample and their corresponding Persistence Diagrams. 
+```{r, echo = F, fig.align='center', fig.height= 4, fig.width= 7}
+par(bty = "n")
+par(mfrow = c(1,2))
+plot(x1, pch = 20, main = "Model 1 - Sample", xlab = expression(X[1]), ylab = expression(X[2]))
+
+plot(x2, pch = 20, main = "Model 2 - Sample", xlab = expression(X[1]), ylab = expression(X[2]))
+
+par(mfrow = c(1,1))
+```
+
+The first intuitive way to compare the two objects is by graphical inspection. In addition to their Persistence Diagrams, we can also compare their Persistence Images, which we implement in this package. As by definition these two samples have a very different structure in terms of cycles (there is $1$ cycle in Model $1$, while there should be none in Model $2$), we set `dimension = 1`, in order to focus on topological features of dimension $1$.
+
+```{r}
 library(kernelTDA)
+pi1 = pers.image(diag1, nbins = 20, dimension = 1, h = 1)
+pi2 = pers.image(diag2, nbins = 20, dimension = 1, h = 1)
+```
+
+
+This results in the following: 
+
+```{r, fig.align='center', echo = F, fig.height= 4, fig.width= 7}
+par(bty = "n")
+par(mfrow = c(1,2))
+plot(diag1, main = "Model 1 - Persistence Diagram")
+image(pi1, main  = "Model 1 - Persistence Image", col = viridis::viridis(100))
+
+plot(diag2, main = "Model 2 - Persistence Diagram")
+image(pi2, main  = "Model 2 - Persistence Image", col = viridis::viridis(100))
+par(mfrow = c(1,1))
+```
+
+A more formal way to compare the two is through a Wasserstein distance. Let us consider for example the Geodesic distance on the space of Persistence Diagrams, i.e. the $L_2$ $q$-Wasserstein distance, and let us take $q = 1$:
+
+```{r wass}
+wasserstein.distance(d1 = diag1, d2 = diag2, dimension = 1, q = 1, p = 2)
+```
+
+
+
+### Learning with topology
+Assume now our data come already in the form of persistence diagrams, and that we have $20$ of them from each of the two different models; the kernels provided in this package allow to use any ready made kernel algorithm to perform standard statistical analysis on these unusual data.
+
+```{r, echo = F}
+set.seed(123)
+foo.data = list()
+for(i in 1:20){
+  foo = circleUnif(100)
+  foo.data[[i]] = ripsDiag(foo, 1,1)$diagram
+}
+
+for(i in 21:40){
+  foo = cbind(runif(100), runif(100))
+  foo.data[[i]] = ripsDiag(foo, 1,1)$diagram
+}
+```
+
+Let us consider for example clustering. Suppose we have stored the diagrams in a list called `foo.data`, whose first $20$ elements are diagram from Model $1$ and last $20$ from Model $2$. We can build a kernel matrix as: 
+
+```{r, fig.align = "center", fig.height= 5, fig.width= 4}
+GSWkernel = gaus.kernel(foo.data, h =1, dimension = 1,  q = 2)
+image(GSWkernel, col = viridis::viridis(100, option = "A"), main = "Kernel Matrix", axes = F)
+```
+
+and then feed it into any standard kernel algorithm. If we choose to use kernel spectral clustering as implemented in the package [kernlab]() for example:
+
+```{r}
+library(kernlab)
+kmat = as.kernelMatrix(GSWkernel)
+GSWclust = specc(kmat, centers = 2)
+```
+
+As we could expect, the cluster labels recover perfectly the structure we gave to our dataset:
+```{r}
+GSWclust@.Data
 ```
