@@ -7,46 +7,30 @@
 
 <!-- badges: end -->
 
-The goal of kernelTDA is to …
+This `R`-package provides an implementation of the most famous kernels
+found in the framework of Topological Data Analysis (TDA), more
+specifically:
 
-## Installation
+  - [Persistence Scale Space
+    Kernel](http://openaccess.thecvf.com/content_cvpr_2015/papers/Reininghaus_A_Stable_Multi-Scale_2015_CVPR_paper.pdf)
+  - [Sliced Wasserstein
+    Kernel](https://dl.acm.org/citation.cfm?id=3305450)
+  - [Persistence Fisher
+    Kernel](http://papers.nips.cc/paper/8205-persistence-fisher-kernel-a-riemannian-manifold-kernel-for-persistence-diagrams.pdf)
+  - [Geodesic Wasserstein Kernel(s)](https://arxiv.org/abs/1709.07100)
+  - [Persistence
+    Images](http://www.jmlr.org/papers/volume18/16-337/16-337.pdf)
 
-You can install the released version of kernelTDA from
-[CRAN](https://CRAN.R-project.org) with:
+In addition, it also provides an `R` interface to the C++ libray
+[HERA](https://bitbucket.org/grey_narn/hera/src/master/), which contains
+an efficient implementation of the \(L_p\) q-Wasserstein distance
+between persistence diagrams.
+
+This package is not yet on CRAN, yet you can install it from this
+repository with:
 
 ``` r
-install.packages("kernelTDA")
+# install.packages("remotes")
+
+remotes::install_github("tulliapadellini/kernelTDA")
 ```
-
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(kernelTDA)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
