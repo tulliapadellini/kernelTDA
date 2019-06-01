@@ -23,7 +23,7 @@ specifically:
 
 In addition, it also provides an `R` interface to the C++ libray
 [HERA](https://bitbucket.org/grey_narn/hera/src/master/), which contains
-an efficient implementation of the \(L_p\) q-Wasserstein distance
+an efficient implementation of the L_p q-Wasserstein distance
 between persistence diagrams.
 
 This package is not yet on CRAN, yet you can install it from this
