@@ -25,16 +25,27 @@ In addition, it also contains an `R` interface to the `C++` library [HERA](https
 
 # Preliminaries - some definitions
 
-Before showing how to use the functions contained in this package, we briefly recap how they are defined, starting from the most common distance between Persistence Diagrams, i.e. the $L_p$ $q-$Wasserstein distance.
+Before showing how to use the functions contained in this package, we briefly recap how those that we are going to use in this vignette are defined. 
 
-Given two Persistence Diagrams $D_1$, $D_2$, we define the as 
 
- 
-* [Persistence Scale Space Kernel](http://openaccess.thecvf.com/content_cvpr_2015/papers/Reininghaus_A_Stable_Multi-Scale_2015_CVPR_paper.pdf)
-* [Sliced Wasserstein Kernel](https://dl.acm.org/citation.cfm?id=3305450)
-* [Persistence Fisher Kernel](http://papers.nips.cc/paper/8205-persistence-fisher-kernel-a-riemannian-manifold-kernel-for-persistence-diagrams.pdf)
+Given two Persistence Diagrams $D_1$, $D_2$, we define the
+
+* $L_p$ $q-$[Wasserstein distance](https://dl.acm.org/citation.cfm?id=3064175): \[ W_{p,q} (D_1, D_2) =  \left[ \inf_{\gamma} \sum _{x\in D_1 } \parallel x - \gamma (x)\parallel_p^q \right]^{\frac{1}{q}}
+\] where the infimum is taken over all bijections $\gamma : D_1 \mapsto D_2$, and $\parallel \cdot\parallel_p$ is the $L_p$ norm. 
+
+
+* [Persistence Scale Space Kernel:](http://openaccess.thecvf.com/content_cvpr_2015/papers/Reininghaus_A_Stable_Multi-Scale_2015_CVPR_paper.pdf)
+\[
+K_{\text{PSS}}(D_1, D_2) = \frac{1}{8\pi\sigma}\sum_{x \in D_1} \sum_{y \in D_2} \mathtt{e}^{-\frac{\parallel x-y \parallel ^2}{8\sigma}} - \mathtt{e}^{-\frac{\parallel x-\bar{y} \parallel^2}{8\sigma}} 
+\]
+
 * [Geodesic Wasserstein Kernel(s)](https://arxiv.org/abs/1709.07100)
-* [Persistence Images](http://www.jmlr.org/papers/volume18/16-337/16-337.pdf)
+
+    - Gaussian: 
+      \[K_{\text{GG}}(D_1, D_2) = \exp\left\{\frac{1}{h} W_{2,2}(D_1, D_2)^2 \right\}\] 
+      
+    - Laplacian: 
+      \[ K_{\text{GL}}(D_1, D_2) = \exp\left\{\frac{1}{h}W_{2,2}(D_1, D_2) \right\}\]
 
 
 ```{r, include = FALSE}
@@ -129,15 +140,24 @@ GSWkernel = gaus.kernel(foo.data, h =1, dimension = 1,  q = 2)
 image(GSWkernel, col = viridis::viridis(100, option = "A"), main = "Kernel Matrix", axes = F)
 ```
 
-and then feed it into any standard kernel algorithm. If we choose to use kernel spectral clustering as implemented in the package [kernlab]() for example:
+and then feed it into any standard kernel algorithm. If we choose to use kernel spectral clustering as implemented in the package [kernlab](https://cran.r-project.org/web/packages/kernlab/index.html) for example:
 
 ```{r}
 library(kernlab)
-kmat = as.kernelMatrix(GSWkernel)
-GSWclust = specc(kmat, centers = 2)
+kmatGSW = as.kernelMatrix(GSWkernel)
+GSWclust = specc(kmatGSW, centers = 2)
 ```
 
 As we could expect, the cluster labels recover perfectly the structure we gave to our dataset:
 ```{r}
 GSWclust@.Data
+```
+
+Analogously, if we want to classify the diagrams we can use a kernel support vector algorithm such as: 
+
+```{r}
+PSSkernel = pss.kernel(foo.data, h =0.1, dimension = 1)
+kmatPSS = as.kernelMatrix(PSSkernel)
+PSSclass = ksvm(x = kmatPSS, y = rep(c(1,2), c(20,20)) )
+PSSclass
 ```
