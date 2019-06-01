@@ -11,13 +11,19 @@ pers.image(d1, nbins, dimension, h)
 
 \item{nbins}{Number of bins for the discretization of the Persistence Surface into the Persistence Image}
 
-\item{dimension}{The dimension of the topological feature (0 for connected components, 1 for cycles etc)}
+\item{dimension}{Dimension of the topological features of interest (0 for connected components, 1 for cycles etc)}
 
-\item{h}{Standard deviation of the Gaussian}
+\item{h}{Standard deviation of the Gaussian kernel used to compute the Persistence Surface}
 }
 \value{
-a \code{nbins}x\code{nbins} matrix containing the Persistence Image
+a \code{nbins} x \code{nbins} matrix containing the Persistence Image
 }
 \description{
 Compute the Persistence Image for a given diagram, using piecewise linear weight functions and Gaussian distribution
+}
+\examples{
+diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
+colnames(diag1) <- c("dimension", "birth", "death")
+pi1 <- pers.image(d1 = diag1, nbins = 20, dimension = 1, h = 1)
+image(pi1) 
 }

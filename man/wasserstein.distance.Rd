@@ -4,12 +4,14 @@
 \alias{wasserstein.distance}
 \title{Compute Lp Wasserstein Distance}
 \usage{
-wasserstein.distance(d1, d2, q, p = 2)
+wasserstein.distance(d1, d2, dimension, q, p = 2)
 }
 \arguments{
 \item{d1}{A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).}
 
 \item{d2}{A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).}
+
+\item{dimension}{Dimension of the topological features of interest (0 for connected components, 1 for cycles etc)}
 
 \item{q}{internal parameter}
 
@@ -20,4 +22,8 @@ The value for the Lp Wassesterstein computed in (\code{d1}, \code{d2})
 }
 \description{
 Compute Lp Wasserstein Distance
+}
+\examples{
+diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
+diag2 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
 }

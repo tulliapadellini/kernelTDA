@@ -15,11 +15,12 @@ Description: Provides tools for exploiting topological information into standard
   To this aim, this package contains the most popular kernels defined on the space of Persistence Diagrams, and Persistence Images.
   Additionally, it allows to compute Wasserstein distance between persistence diagrams with an arbitrary ground metric, 
   building an R interface for the C++ library 'HERA' (https://bitbucket.org/grey_narn/hera/src/master/).
-Imports: Rcpp (>= 1.0.1), RcppEigen (>= 0.3.3.5.0), kernlab, mvtnorm
+Imports: Rcpp (>= 1.0.1), RcppEigen (>= 0.3.3.5.0), mvtnorm
 Suggests: 
     TDA,
     knitr,
-    rmarkdown
+    rmarkdown, 
+    kernlab
 LinkingTo: Rcpp, RcppEigen
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
