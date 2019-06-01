@@ -1,18 +1,20 @@
 
-#' Compute the Persistence Image for a given diagram, using piecewise linear weight functions and Gaussian distribution
+#' Persistence Image
+#' 
+#' Compute the Persistence Image for a given diagram, using piecewise linear weight functions and Gaussian baseline distribution.
 #'
-#' @param d1 A persistence diagram, in the form of a matrix with 3 columns (first one is the dimension, second is the birth-time, last one is the death-time)
-#' @param nbins Number of bins for the discretization of the Persistence Surface into the Persistence Image
-#' @param dimension Dimension of the topological features of interest (0 for connected components, 1 for cycles etc)
-#' @param h Standard deviation of the Gaussian kernel used to compute the Persistence Surface
-#' @return a \code{nbins} x \code{nbins} matrix containing the Persistence Image
+#' @param d1 A persistence diagram, in the form of a matrix with 3 columns (first one is the dimension, second is the birth-time, last one is the death-time).
+#' @param nbins Number of bins for the discretization of the Persistence Surface into the Persistence Image.
+#' @param dimension Dimension of the topological features of interest (0 for connected components, 1 for cycles etc).
+#' @param h Standard deviation of the Gaussian baseline used to compute the Persistence Surface.
+#' @return a \code{nbins} x \code{nbins} matrix containing the Persistence Image.
 #' @references 
+#' \insertRef{adams2017persistence}{kernelTDA}
 #' @examples
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
 #' colnames(diag1) <- c("dimension", "birth", "death")
 #' pi1 <- pers.image(d1 = diag1, nbins = 20, dimension = 1, h = 1)
 #' image(pi1) 
-#' @export
 pers.image <- function(d1, nbins, dimension, h){
   
   d1 = d1[d1[,1]==dimension, 2:3, drop = F]

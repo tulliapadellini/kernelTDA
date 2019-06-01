@@ -2,25 +2,33 @@
 % Please edit documentation in R/topological_kernels.R
 \name{gaus.kernel}
 \alias{gaus.kernel}
-\title{Compute L_{2} Geodesic Gaussian Kernel (GGK)}
+\title{Geodesic Gaussian Kernel (GGK)}
 \usage{
-gaus.kernel(d1, d2 = NULL, h, dimension, p)
+gaus.kernel(d1, d2 = NULL, h, dimension, q)
 }
 \arguments{
-\item{d1}{A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams}
+\item{d1}{A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams.}
 
 \item{d2}{A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).}
 
-\item{h}{bandwidth of the kernel}
+\item{h}{bandwidth of the kernel.}
 
-\item{dimension}{The dimension of the topological feature (0 for connected components, 1 for cycles etc)}
+\item{dimension}{The dimension of the topological feature (0 for connected components, 1 for cycles etc).}
 
-\item{p}{order of the p-Wasserstein distance}
+\item{q}{order of the q-Wasserstein distance.}
 }
 \value{
 If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the GGK computed in (\code{d1}[[i]], \code{d2}[[j]]), 
 otherwise it returns the value for the GGK computed in (\code{d1}, \code{d2}).
 }
 \description{
-Compute L_{2} Geodesic Gaussian Kernel (GGK)
+Computes the Geodesic Gaussian Kernel (GGK) between persistence diagrams.
+}
+\examples{
+diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
+diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+gaus.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, p = 2)
+}
+\references{
+\insertRef{padellini2017supervised}{kernelTDA}
 }

@@ -2,28 +2,31 @@
 % Please edit documentation in R/persistence_image.R
 \name{pers.image}
 \alias{pers.image}
-\title{Compute the Persistence Image for a given diagram, using piecewise linear weight functions and Gaussian distribution}
+\title{Persistence Image}
 \usage{
 pers.image(d1, nbins, dimension, h)
 }
 \arguments{
-\item{d1}{A persistence diagram, in the form of a matrix with 3 columns (first one is the dimension, second is the birth-time, last one is the death-time)}
+\item{d1}{A persistence diagram, in the form of a matrix with 3 columns (first one is the dimension, second is the birth-time, last one is the death-time).}
 
-\item{nbins}{Number of bins for the discretization of the Persistence Surface into the Persistence Image}
+\item{nbins}{Number of bins for the discretization of the Persistence Surface into the Persistence Image.}
 
-\item{dimension}{Dimension of the topological features of interest (0 for connected components, 1 for cycles etc)}
+\item{dimension}{Dimension of the topological features of interest (0 for connected components, 1 for cycles etc).}
 
-\item{h}{Standard deviation of the Gaussian kernel used to compute the Persistence Surface}
+\item{h}{Standard deviation of the Gaussian baseline used to compute the Persistence Surface.}
 }
 \value{
-a \code{nbins} x \code{nbins} matrix containing the Persistence Image
+a \code{nbins} x \code{nbins} matrix containing the Persistence Image.
 }
 \description{
-Compute the Persistence Image for a given diagram, using piecewise linear weight functions and Gaussian distribution
+Compute the Persistence Image for a given diagram, using piecewise linear weight functions and Gaussian baseline distribution.
 }
 \examples{
 diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
 colnames(diag1) <- c("dimension", "birth", "death")
 pi1 <- pers.image(d1 = diag1, nbins = 20, dimension = 1, h = 1)
 image(pi1) 
+}
+\references{
+\insertRef{adams2017persistence}{kernelTDA}
 }

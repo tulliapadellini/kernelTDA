@@ -8,24 +8,30 @@ L2.wass <- function(d1, d2, h, dimension, pp){
 }
 
 
-#' Compute L_{2} Geodesic Gaussian Kernel (GGK)
+#' Geodesic Gaussian Kernel (GGK)
+#' 
+#' Computes the Geodesic Gaussian Kernel (GGK) between persistence diagrams. 
 #'
-#' @param d1 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams
+#' @param d1 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams.
 #' @param d2 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).
-#' @param h bandwidth of the kernel
-#' @param dimension The dimension of the topological feature (0 for connected components, 1 for cycles etc)
-#' @param p order of the p-Wasserstein distance
+#' @param h bandwidth of the kernel.
+#' @param dimension The dimension of the topological feature (0 for connected components, 1 for cycles etc).
+#' @param q order of the q-Wasserstein distance.
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the GGK computed in (\code{d1}[[i]], \code{d2}[[j]]), 
 #' otherwise it returns the value for the GGK computed in (\code{d1}, \code{d2}).
 #' @references 
-#' @export
-gaus.kernel <- function (d1, d2 = NULL, h, dimension, p)
+#' \insertRef{padellini2017supervised}{kernelTDA}
+#' @examples 
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+#' gaus.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, p = 2)
+gaus.kernel <- function (d1, d2 = NULL, h, dimension, q)
 {
   if(!is.null(d2)) {
-    out = L2.wass(d1, d2, h = h, dimension=dimension, pp = p)
+    out = L2.wass(d1, d2, h = h, dimension=dimension, pp = q)
   }
   else{
-    k.fun = function(x, y) L2.wass(d1[[x]], d1[[y]], h = h, dimension=dimension, pp = p)
+    k.fun = function(x, y) L2.wass(d1[[x]], d1[[y]], h = h, dimension=dimension, pp = q)
     k.fun = Vectorize(k.fun)
     d.idx = seq_along(d1)
     out   = outer(d.idx,d.idx, k.fun)
@@ -34,23 +40,30 @@ gaus.kernel <- function (d1, d2 = NULL, h, dimension, p)
 }
 
 
-#' Compute L_{2} Geodesic Laplacian Kernel (GLK)
+#' Geodesic Laplacian Kernel (GLK)
+#' 
+#' Computes the Geodesic Laplacian Kernel (GLK) between persistence diagrams. 
 #'
 #' @param d1 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams
 #' @param d2 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).
-#' @param h bandwidth of the kernel
+#' @param h bandwidth of the kernel.
 #' @param dimension The dimension of the topological feature (0 for connected components, 1 for cycles etc)
-#' @param p order of the p-Wasserstein distance
+#' @param q order of the q-Wasserstein distance.
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the GLK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the GLK computed in (\code{d1}, \code{d2}).
-#' @export
-lapl.kernel <- function (d1, d2 = NULL, h, dimension, p)
+#' @examples 
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+#' lapl.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, p = 2)
+#' @references 
+#' \insertRef{padellini2017supervised}{kernelTDA}
+lapl.kernel <- function (d1, d2 = NULL, h, dimension, q)
 {
   if(!is.null(d2)) {
-    out = L2.wass(d1, d2, h = h, dimension=dimension, pp = p)
+    out = L2.wass(d1, d2, h = h, dimension=dimension, pp = q)
   }
   else{
-    k.fun = function(x, y) L2.wass(d1[[x]], d1[[y]], h = h, dimension=dimension, pp = p)
+    k.fun = function(x, y) L2.wass(d1[[x]], d1[[y]], h = h, dimension=dimension, pp = q)
     k.fun = Vectorize(k.fun)
     d.idx = seq_along(d1)
     out   = outer(d.idx,d.idx, k.fun)
@@ -60,27 +73,31 @@ lapl.kernel <- function (d1, d2 = NULL, h, dimension, p)
 
 
 
-# Linfty Wasserstein Kernel -----------------------------------------------
 
-#' Compute a Wasserstein Kernel (WK)
+#' L_infty q-Wasserstein Kernel (WK)
+#'
+#' Computes the L_infty q-Wasserstein Kernel (WK) between persistence diagrams.
 #'
 #' @param d1 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams
 #' @param d2 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).
-#' @param h bandwidth of the kernel
-#' @param dimension The dimension of the topological feature (0 for connected components, 1 for cycles etc)
-#' @param p order of the p-Wasserstein distance
+#' @param h bandwidth of the kernel.
+#' @param dimension The dimension of the topological feature (0 for connected components, 1 for cycles etc).
+#' @param q order of the q-Wasserstein distance.
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the WK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the WK computed in (\code{d1}, \code{d2}).
-#' @export
-wass.kernel <- function (d1, d2 = NULL, h, dimension, p)
+#' @examples
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+#' wass.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, q = 2)
+wass.kernel <- function (d1, d2 = NULL, h, dimension, q)
 {
   
   
   if(!is.null(d2)) {
-    out = exp(-1/h*TDA::wasserstein(d1, d2, p=p, dimension = dimension)^2)
+    out = exp(-1/h*TDA::wasserstein(d1, d2, p=q, dimension = dimension)^2)
   }
   else{
-    k.fun = function(x, y) exp(-1/h*TDA::wasserstein(d1[[x]], d1[[y]], p=p, dimension = dimension)^2)
+    k.fun = function(x, y) exp(-1/h*TDA::wasserstein(d1[[x]], d1[[y]], p=q, dimension = dimension)^2)
     k.fun = Vectorize(k.fun)
     d.idx = seq_along(d1)
     out   = outer(d.idx,d.idx, k.fun)
@@ -117,15 +134,22 @@ pss.k <- function(x, y, h, dimension)
   }
 }
 
-#' Compute Persistence Scale Space Kernel (PSSK)
+#' Persistence Scale Space Kernel (PSSK)
+#' 
+#' Computes the Persistence Scale Space Kernel (PSSK) between persistence diagrams 
 #'
 #' @param d1 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams
 #' @param d2 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).
-#' @param h bandwidth of the kernel
-#' @param dimension The dimension of the topological feature (0 for connected components, 1 for cycles etc)
+#' @param h bandwidth of the kernel.
+#' @param dimension The dimension of the topological feature (0 for connected components, 1 for cycles etc).
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the PSSK computed in (\code{d1}[[i]], \code{d2}[[j]]),
-#' otherwise it returns the value for the PSSK computed in (\code{d1}, \code{d2})
-#' @export
+#' otherwise it returns the value for the PSSK computed in (\code{d1}, \code{d2}).
+#' @examples
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+#' pss.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
+#' @references 
+#' \insertRef{reininghaus2015stable}{kernelTDA}
 pss.kernel <- function (d1, d2 = NULL, h, dimension)
 {
   if(!is.null(d2)) {
@@ -183,7 +207,9 @@ sw.k <- function(x, y, dimension, h, M){
 }
 
 
-#' Compute Persistence Sliced Wasserstein Kernel (SWK)
+#' Persistence Sliced Wasserstein Kernel (SWK)
+#' 
+#' Computes the Persistence Sliced Wasserstein Kernel (SWK) between persistence diagrams.
 #'
 #' @param d1 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams
 #' @param d2 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).
@@ -192,7 +218,12 @@ sw.k <- function(x, y, dimension, h, M){
 #' @param M number of directions on which to approximate the Sliced Wasserstein Distance 
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the SWK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the SWK computed in (\code{d1}, \code{d2})
-#' @export
+#' @examples 
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+#' sw.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
+#' @references 
+#' \insertRef{carriere2017sliced}{kernelTDA}
 sw.kernel <- function(d1, d2 = NULL, h, dimension, M=10){
   
   if(!is.null(d2)) {
@@ -245,16 +276,23 @@ pf.k <- function(x, y, dimension, h, sigma)
 }
 
 
-#' Compute Persistence Fisher Kernel (PFK)
+#' Persistence Fisher Kernel (PFK)
+#' 
+#' Computes the Persistence Fisher Kernel (PFK) between persistence diagrams. 
 #'
-#' @param d1 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams
+#' @param d1 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams.
 #' @param d2 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).
-#' @param h bandwidth of the PFK
+#' @param h bandwidth of the PFK.
 #' @param dimension The dimension of the topological feature (0 for connected components, 1 for cycles etc)
-#' @param sigma standard deviation of Gaussian Kernel used to 
+#' @param sigma standard deviation of the base Gaussian Kernel.
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the PFK computed in (\code{d1}[[i]], \code{d2}[[j]]),
-#' otherwise it returns the value for the PFK computed in (\code{d1}, \code{d2})
-#' @export
+#' otherwise it returns the value for the PFK computed in (\code{d1}, \code{d2}).
+#' @examples 
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+#' pf.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, sigma = 1)
+#' @references 
+#' \insertRef{le2018persistence}{kernelTDA}
 pf.kernel <- function(d1, d2 = NULL, h, dimension, sigma){
   if(!is.null(d2)) {
     out = pf.k(d1, d2, h = h, dimension=dimension, sigma = sigma)

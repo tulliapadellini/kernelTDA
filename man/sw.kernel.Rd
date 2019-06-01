@@ -2,7 +2,7 @@
 % Please edit documentation in R/topological_kernels.R
 \name{sw.kernel}
 \alias{sw.kernel}
-\title{Compute Persistence Sliced Wasserstein Kernel (SWK)}
+\title{Persistence Sliced Wasserstein Kernel (SWK)}
 \usage{
 sw.kernel(d1, d2 = NULL, h, dimension, M = 10)
 }
@@ -22,5 +22,13 @@ If \code{d1} is a list of Persistence Diagrams, this function returns a matrix w
 otherwise it returns the value for the SWK computed in (\code{d1}, \code{d2})
 }
 \description{
-Compute Persistence Sliced Wasserstein Kernel (SWK)
+Computes the Persistence Sliced Wasserstein Kernel (SWK) between persistence diagrams.
+}
+\examples{
+diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
+diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+sw.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
+}
+\references{
+\insertRef{carriere2017sliced}{kernelTDA}
 }

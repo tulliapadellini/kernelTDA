@@ -2,7 +2,7 @@
 % Please edit documentation in R/topological_kernels.R
 \name{pss.kernel}
 \alias{pss.kernel}
-\title{Compute Persistence Scale Space Kernel (PSSK)}
+\title{Persistence Scale Space Kernel (PSSK)}
 \usage{
 pss.kernel(d1, d2 = NULL, h, dimension)
 }
@@ -11,14 +11,22 @@ pss.kernel(d1, d2 = NULL, h, dimension)
 
 \item{d2}{A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).}
 
-\item{h}{bandwidth of the kernel}
+\item{h}{bandwidth of the kernel.}
 
-\item{dimension}{The dimension of the topological feature (0 for connected components, 1 for cycles etc)}
+\item{dimension}{The dimension of the topological feature (0 for connected components, 1 for cycles etc).}
 }
 \value{
 If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the PSSK computed in (\code{d1}[[i]], \code{d2}[[j]]),
-otherwise it returns the value for the PSSK computed in (\code{d1}, \code{d2})
+otherwise it returns the value for the PSSK computed in (\code{d1}, \code{d2}).
 }
 \description{
-Compute Persistence Scale Space Kernel (PSSK)
+Computes the Persistence Scale Space Kernel (PSSK) between persistence diagrams
+}
+\examples{
+diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
+diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+pss.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
+}
+\references{
+\insertRef{reininghaus2015stable}{kernelTDA}
 }
