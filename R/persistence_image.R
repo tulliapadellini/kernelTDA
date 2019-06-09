@@ -10,6 +10,7 @@
 #' @return a \code{nbins} x \code{nbins} matrix containing the Persistence Image.
 #' @references 
 #' \insertRef{adams2017persistence}{kernelTDA}
+#' @export
 #' @examples
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
 #' colnames(diag1) <- c("dimension", "birth", "death")

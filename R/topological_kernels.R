@@ -25,6 +25,7 @@ L2.wass <- function(d1, d2, h, dimension, pp){
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
 #' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
 #' gaus.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, p = 2)
+#' @export
 gaus.kernel <- function (d1, d2 = NULL, h, dimension, q)
 {
   if(!is.null(d2)) {
@@ -57,6 +58,7 @@ gaus.kernel <- function (d1, d2 = NULL, h, dimension, q)
 #' lapl.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, p = 2)
 #' @references 
 #' \insertRef{padellini2017supervised}{kernelTDA}
+#' @export
 lapl.kernel <- function (d1, d2 = NULL, h, dimension, q)
 {
   if(!is.null(d2)) {
@@ -89,6 +91,7 @@ lapl.kernel <- function (d1, d2 = NULL, h, dimension, q)
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
 #' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
 #' wass.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, q = 2)
+#' @export
 wass.kernel <- function (d1, d2 = NULL, h, dimension, q)
 {
   
@@ -150,6 +153,7 @@ pss.k <- function(x, y, h, dimension)
 #' pss.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
 #' @references 
 #' \insertRef{reininghaus2015stable}{kernelTDA}
+#' @export
 pss.kernel <- function (d1, d2 = NULL, h, dimension)
 {
   if(!is.null(d2)) {
@@ -224,6 +228,7 @@ sw.k <- function(x, y, dimension, h, M){
 #' sw.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
 #' @references 
 #' \insertRef{carriere2017sliced}{kernelTDA}
+#' @export
 sw.kernel <- function(d1, d2 = NULL, h, dimension, M=10){
   
   if(!is.null(d2)) {
@@ -293,6 +298,7 @@ pf.k <- function(x, y, dimension, h, sigma)
 #' pf.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, sigma = 1)
 #' @references 
 #' \insertRef{le2018persistence}{kernelTDA}
+#' @export
 pf.kernel <- function(d1, d2 = NULL, h, dimension, sigma){
   if(!is.null(d2)) {
     out = pf.k(d1, d2, h = h, dimension=dimension, sigma = sigma)

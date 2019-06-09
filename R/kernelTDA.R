@@ -6,8 +6,8 @@
 #' 
 #' @docType package
 #' @name kernelTDA
-NULL
+#' @useDynLib kernelTDA
 #' @import RcppEigen
-NULL
 #' @importFrom Rcpp evalCpp
+#' @importFrom Rcpp sourceCpp
 NULL

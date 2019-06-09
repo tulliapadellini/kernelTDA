@@ -16,6 +16,7 @@
 #' wasserstein.distance(diag1, diag2, dimension = 1, q = 1, p = 2)
 #' @references
 #' \insertRef{kerber2017geometry}{kernelTDA}
+#' @export
 wasserstein.distance = function(d1, d2, dimension,  q, p = 2) {
   
   
