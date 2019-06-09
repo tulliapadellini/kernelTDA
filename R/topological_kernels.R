@@ -22,9 +22,9 @@ L2.wass <- function(d1, d2, h, dimension, pp){
 #' @references 
 #' \insertRef{padellini2017supervised}{kernelTDA}
 #' @examples 
-#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
-#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
-#' gaus.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, p = 2)
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
+#' gaus.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, q = 2)
 #' @export
 gaus.kernel <- function (d1, d2 = NULL, h, dimension, q)
 {
@@ -53,9 +53,9 @@ gaus.kernel <- function (d1, d2 = NULL, h, dimension, q)
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the GLK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the GLK computed in (\code{d1}, \code{d2}).
 #' @examples 
-#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
-#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
-#' lapl.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, p = 2)
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
+#' lapl.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, q = 2)
 #' @references 
 #' \insertRef{padellini2017supervised}{kernelTDA}
 #' @export
@@ -88,8 +88,8 @@ lapl.kernel <- function (d1, d2 = NULL, h, dimension, q)
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the WK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the WK computed in (\code{d1}, \code{d2}).
 #' @examples
-#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
-#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
 #' wass.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, q = 2)
 #' @export
 wass.kernel <- function (d1, d2 = NULL, h, dimension, q)
@@ -148,8 +148,8 @@ pss.k <- function(x, y, h, dimension)
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the PSSK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the PSSK computed in (\code{d1}, \code{d2}).
 #' @examples
-#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
-#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
 #' pss.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
 #' @references 
 #' \insertRef{reininghaus2015stable}{kernelTDA}
@@ -223,8 +223,8 @@ sw.k <- function(x, y, dimension, h, M){
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the SWK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the SWK computed in (\code{d1}, \code{d2})
 #' @examples 
-#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
-#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
 #' sw.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
 #' @references 
 #' \insertRef{carriere2017sliced}{kernelTDA}
@@ -293,8 +293,8 @@ pf.k <- function(x, y, dimension, h, sigma)
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the PFK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the PFK computed in (\code{d1}, \code{d2}).
 #' @examples 
-#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
-#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
 #' pf.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, sigma = 1)
 #' @references 
 #' \insertRef{le2018persistence}{kernelTDA}

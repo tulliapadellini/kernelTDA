@@ -138,6 +138,11 @@ Let us consider for example clustering. Suppose we have stored the diagrams in a
 ```{r, fig.align = "center", fig.height= 5, fig.width= 4}
 GSWkernel = gaus.kernel(foo.data, h =1, dimension = 1,  q = 2)
 image(GSWkernel, col = viridis::viridis(100, option = "A"), main = "Kernel Matrix", axes = F)
+y = rep(c(1,2), c(20,20))
+
+dim(GSWkernel)
+kk = Ksvm(kernelmat = GSWkernel, y =y)
+kk$fitted
 ```
 
 and then feed it into any standard kernel algorithm. If we choose to use kernel spectral clustering as implemented in the package [kernlab](https://cran.r-project.org/web/packages/kernlab/index.html) for example:

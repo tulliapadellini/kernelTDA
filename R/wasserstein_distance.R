@@ -11,8 +11,8 @@
 #' @return The value for the L_p q-Wassesterstein between \code{d1} and \code{d2}.
 #' @details This function provides an R interface for the efficient C++ library `HERA` by Michael Kerber, Dmitriy Morozov, and Arnur Nigmetov (\url{https://bitbucket.org/grey_narn/hera/src/master/}).
 #' @examples 
-#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
-#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+#' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
+#' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
 #' wasserstein.distance(diag1, diag2, dimension = 1, q = 1, p = 2)
 #' @references
 #' \insertRef{kerber2017geometry}{kernelTDA}

@@ -28,8 +28,8 @@ as ground metric.
 This function provides an R interface for the efficient C++ library `HERA` by Michael Kerber, Dmitriy Morozov, and Arnur Nigmetov (\url{https://bitbucket.org/grey_narn/hera/src/master/}).
 }
 \examples{
-diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
-diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
+diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
 wasserstein.distance(diag1, diag2, dimension = 1, q = 1, p = 2)
 }
 \references{

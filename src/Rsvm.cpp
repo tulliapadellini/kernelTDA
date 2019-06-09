@@ -427,8 +427,6 @@ void svmpredict  (int    *decisionvalues,
     free(m.sv_coef);
 }
 
-
-//' @export
 // [[Rcpp::export]]
 List svmtrain_R(Eigen::MatrixXd x, int r, int c,    
                 
@@ -523,7 +521,6 @@ List svmtrain_R(Eigen::MatrixXd x, int r, int c,
 }	     	     
 
 
-//' @export
 // [[Rcpp::export]]
 List svmpredict_R(int decisionvalues,
                    int probability,

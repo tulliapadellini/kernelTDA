@@ -23,8 +23,8 @@ otherwise it returns the value for the PSSK computed in (\code{d1}, \code{d2}).
 Computes the Persistence Scale Space Kernel (PSSK) between persistence diagrams
 }
 \examples{
-diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
-diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
+diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
 pss.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
 }
 \references{

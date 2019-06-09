@@ -1,97 +1,75 @@
+#' Krein Support Vector Machine
+#' 
+#' Solves a kernelized Support Vector Machine in the case where the kernel used may not be positive semidefinite.
+#'
+#' @param kernelmat the kernel (Grahm) matrix computed for all observations
+#' @param y a vector of labels
+#' @param cost cost of violating the constraint
+#' @param class.weights a named vector of weights for the different classes, used for asymmetric class sizes. Not all factor levels have to be supplied (default weight: 1). All components have to be named. Specifying "inverse" will choose the weights inversely proportional to the class distribution.
+#' @param cross number of fold in a k-fold cross validation 
+#' @param probability logical indicating whether the model should allow for probability predictions (default: \code{FALSE}).
+#' @param fitted logical indicating whether the fitted values should be computed and included in the model or not (default: \code{TRUE})
+#' @param subset An index vector specifying the cases to be used in the training sample. (NOTE: If given, this argument must be named.)
+
 #' @export
 Ksvm <-
 function (x, ...)
     UseMethod ("Ksvm")
 
-#' @export
-Ksvm.formula <-
-function (formula, data = NULL, ..., subset, na.action = na.omit, scale = TRUE)
-{
-    call <- match.call()
-    if (!inherits(formula, "formula"))
-        stop("method is only for formula objects")
-    m <- match.call(expand.dots = FALSE)
-    if (identical(class(eval.parent(m$data)), "matrix"))
-        m$data <- as.data.frame(eval.parent(m$data))
-    m$... <- NULL
-    m$scale <- NULL
-    m[[1L]] <- quote(stats::model.frame)
-    m$na.action <- na.action
-    m <- eval(m, parent.frame())
-    Terms <- attr(m, "terms")
-    attr(Terms, "intercept") <- 0
-    x <- model.matrix(Terms, m)
-    y <- model.extract(m, "response")
-    attr(x, "na.action") <- attr(y, "na.action") <- attr(m, "na.action")
-    ret <- Ksvm.default (x, y, scale = scale, ..., na.action = na.action)
-    ret$call <- call
-    ret$call[[1]] <- as.name("Ksvm")
-    ret$terms <- Terms
-    if (!is.null(attr(m, "na.action")))
-        ret$na.action <- attr(m, "na.action")
-    class(ret) <- c("Ksvm.formula", class(ret))
-    return (ret)
-}
 
 #' @export
 Ksvm.default <-
-function (x,
+function (kernelmat   = NULL,
           y           = NULL,
-          scale       = TRUE,
-          degree      = 3,
-          gamma       = if (is.vector(x)) 1 else 1 / ncol(x),
-          coef0       = 0,
           cost        = 1,
-          nu          = 0.5,
           class.weights = NULL,
-          cachesize   = 40,
-          tolerance   = 0.001,
-          epsilon     = 0.1,
-          shrinking   = TRUE,
           cross       = 0,
           probability = FALSE,
           fitted      = TRUE,
-          ...,
           subset,
-          na.action = na.omit)
+          ...)
 {
+    
+    scale = FALSE
+    sparse = FALSE
+    shrinking   = FALSE
+    na.action = na.omit
+    
+    degree      = 0
+    gamma       = 1
+    coef0       = 0
+    nu          = 0.5
+    cachesize   = 40
+    tolerance   = 0.001
+    epsilon     = 0.1
+    
+    
+    
+    x = kernelmat
+    if(!is.factor(y)) y = as.factor(y)
     yorig <- y
+    
     if(inherits(x, "Matrix")) {
         loadNamespace("SparseM")
         loadNamespace("Matrix")
         x <- as(x, "matrix.csr")
     }
-    if(inherits(x, "simple_triplet_matrix")) {
-        loadNamespace("SparseM")
-        ind <- order(x$i, x$j)
-        x <- new("matrix.csr",
-                 ra = x$v[ind],
-                 ja = x$j[ind],
-                 ia = as.integer(cumsum(c(1, tabulate(x$i[ind])))),
-                 dimension = c(x$nrow, x$ncol))
-    }
     if (sparse <- inherits(x, "matrix.csr"))
         loadNamespace("SparseM")
 
     ## NULL parameters?
-    if(is.null(degree)) stop(sQuote("degree"), " must not be NULL!")
-    if(is.null(gamma)) stop(sQuote("gamma"), " must not be NULL!")
-    if(is.null(coef0)) stop(sQuote("coef0"), " must not be NULL!")
     if(is.null(cost)) stop(sQuote("cost"), " must not be NULL!")
-    if(is.null(nu)) stop(sQuote("nu"), " must not be NULL!")
-    if(is.null(epsilon)) stop(sQuote("epsilon"), " must not be NULL!")
     if(is.null(tolerance)) stop(sQuote("tolerance"), " must not be NULL!")
 
     x.scale <- y.scale <- NULL
-    formula <- inherits(x, "Ksvm.formula")
-
-    ## determine model type
-    if (is.null(type)) type <-
-        if (is.null(y)) "one-classification"
-        else if (is.factor(y)) "C-classification"
-        else "eps-regression"
 
     type = 0
+    ## determine model type
+    # if (is.null(type)) type <-
+    #     if (is.null(y)) "one-classification"
+    #     else if (is.factor(y)) "C-classification"
+    #     else "eps-regression"
+
     # for now only C-classification is implemented for indefinite kernels
     
     # type <- pmatch(type, c("C-classification",
@@ -112,7 +90,7 @@ function (x,
     # 
     # if (kernel > 10) stop("wrong kernel specification!")
 
-    if (nrow(x) != ncol(x)) stop("kernel matrix must be squared")
+#    if (nrow(x) != ncol(x)) stop("kernel matrix must be squared")
     if(kernel == 4) x = cbind(1:nrow(x), x)
     xhold   <- if (fitted) x else NULL
     

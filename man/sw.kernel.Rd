@@ -25,8 +25,8 @@ otherwise it returns the value for the SWK computed in (\code{d1}, \code{d2})
 Computes the Persistence Sliced Wasserstein Kernel (SWK) between persistence diagrams.
 }
 \examples{
-diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
-diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = F)
+diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
+diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
 sw.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
 }
 \references{

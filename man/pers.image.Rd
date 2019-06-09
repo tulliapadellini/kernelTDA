@@ -22,7 +22,7 @@ a \code{nbins} x \code{nbins} matrix containing the Persistence Image.
 Compute the Persistence Image for a given diagram, using piecewise linear weight functions and Gaussian baseline distribution.
 }
 \examples{
-diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = F)
+diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
 colnames(diag1) <- c("dimension", "birth", "death")
 pi1 <- pers.image(d1 = diag1, nbins = 20, dimension = 1, h = 1)
 image(pi1) 
