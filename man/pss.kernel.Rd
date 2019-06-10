@@ -30,3 +30,6 @@ pss.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
 \references{
 \insertRef{reininghaus2015stable}{kernelTDA}
 }
+\author{
+Tullia Padellini
+}

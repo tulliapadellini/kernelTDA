@@ -29,3 +29,6 @@ diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
 diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
 wass.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, q = 2)
 }
+\author{
+Tullia Padellini
+}

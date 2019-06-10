@@ -2,7 +2,7 @@ Package: kernelTDA
 Type: Package
 Title: Statsical Learning with Kernel for Persistence Diagrams
 License: GPL-3
-Version: 1.0.0
+Version: 0.1.0
 Date: 2019-06-10
 Authors@R: c(
     person("Tullia", "Padellini", email = "tullia.padellini@uniroma1.it", role = c("aut", "cre")), 
@@ -21,13 +21,15 @@ Description: Provides tools for exploiting topological information into standard
   based on the C++ library 'LIBSVM' (https://www.csie.ntu.edu.tw/~cjlin/libsvm/), and on its R implementation <e1071>.
   Additionally, it allows to compute Wasserstein distance between persistence diagrams with an arbitrary ground metric, 
   building an R interface for the C++ library 'HERA' (https://bitbucket.org/grey_narn/hera/src/master/).
-Imports: Rcpp (>= 1.0.1), RcppEigen (>= 0.3.3.5.0), mvtnorm, Rdpack
+Imports: Rcpp (>= 1.0.1), RcppEigen (>= 0.3.3.5.0), mvtnorm, Rdpack, methods, stats
 Suggests: 
     TDA,
     knitr,
     rmarkdown,
     SparseM,
-    Matrix
+    Matrix, 
+    kernlab,
+    viridis
 LinkingTo: Rcpp, RcppEigen
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

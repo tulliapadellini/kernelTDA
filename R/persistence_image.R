@@ -8,14 +8,15 @@
 #' @param dimension Dimension of the topological features of interest (0 for connected components, 1 for cycles etc).
 #' @param h Standard deviation of the Gaussian baseline used to compute the Persistence Surface.
 #' @return a \code{nbins} x \code{nbins} matrix containing the Persistence Image.
+#' @author Tullia Padellini
 #' @references 
 #' \insertRef{adams2017persistence}{kernelTDA}
-#' @export
 #' @examples
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
 #' colnames(diag1) <- c("dimension", "birth", "death")
 #' pi1 <- pers.image(d1 = diag1, nbins = 20, dimension = 1, h = 1)
 #' image(pi1) 
+#' @export
 pers.image <- function(d1, nbins, dimension, h){
   
   d1 = d1[d1[,1]==dimension, 2:3, drop = F]

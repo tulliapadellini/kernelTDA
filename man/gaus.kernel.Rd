@@ -32,3 +32,6 @@ gaus.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, q = 2)
 \references{
 \insertRef{padellini2017supervised}{kernelTDA}
 }
+\author{
+Tullia Padellini
+}

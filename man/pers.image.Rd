@@ -30,3 +30,6 @@ image(pi1)
 \references{
 \insertRef{adams2017persistence}{kernelTDA}
 }
+\author{
+Tullia Padellini
+}

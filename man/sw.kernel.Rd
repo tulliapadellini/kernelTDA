@@ -32,3 +32,6 @@ sw.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
 \references{
 \insertRef{carriere2017sliced}{kernelTDA}
 }
+\author{
+Tullia Padellini
+}

@@ -19,6 +19,7 @@ L2.wass <- function(d1, d2, h, dimension, pp){
 #' @param q order of the q-Wasserstein distance.
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the GGK computed in (\code{d1}[[i]], \code{d2}[[j]]), 
 #' otherwise it returns the value for the GGK computed in (\code{d1}, \code{d2}).
+#' @author Tullia Padellini
 #' @references 
 #' \insertRef{padellini2017supervised}{kernelTDA}
 #' @examples 
@@ -52,6 +53,7 @@ gaus.kernel <- function (d1, d2 = NULL, h, dimension, q)
 #' @param q order of the q-Wasserstein distance.
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the GLK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the GLK computed in (\code{d1}, \code{d2}).
+#' @author Tullia Padellini
 #' @examples 
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
 #' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
@@ -87,6 +89,7 @@ lapl.kernel <- function (d1, d2 = NULL, h, dimension, q)
 #' @param q order of the q-Wasserstein distance.
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the WK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the WK computed in (\code{d1}, \code{d2}).
+#' @author Tullia Padellini
 #' @examples
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
 #' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
@@ -147,6 +150,7 @@ pss.k <- function(x, y, h, dimension)
 #' @param dimension The dimension of the topological feature (0 for connected components, 1 for cycles etc).
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the PSSK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the PSSK computed in (\code{d1}, \code{d2}).
+#' @author Tullia Padellini
 #' @examples
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
 #' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
@@ -222,6 +226,7 @@ sw.k <- function(x, y, dimension, h, M){
 #' @param M number of directions on which to approximate the Sliced Wasserstein Distance 
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the SWK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the SWK computed in (\code{d1}, \code{d2})
+#' @author Tullia Padellini
 #' @examples 
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
 #' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
@@ -292,6 +297,7 @@ pf.k <- function(x, y, dimension, h, sigma)
 #' @param sigma standard deviation of the base Gaussian Kernel.
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the PFK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the PFK computed in (\code{d1}, \code{d2}).
+#' @author Tullia Padellini
 #' @examples 
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
 #' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)

@@ -11,5 +11,6 @@
 #' @importFrom Rcpp evalCpp
 #' @importFrom Rcpp sourceCpp
 #' @importFrom Rdpack reprompt
-
+#' @importFrom methods as new
+#' @importFrom stats delete.response fitted model.matrix na.omit napredict pnorm predict terms
 NULL

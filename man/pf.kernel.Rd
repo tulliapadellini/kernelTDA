@@ -32,3 +32,6 @@ pf.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, sigma = 1)
 \references{
 \insertRef{le2018persistence}{kernelTDA}
 }
+\author{
+Tullia Padellini
+}

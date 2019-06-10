@@ -9,6 +9,7 @@
 #' @param q Order of the q-Wasserstein distance.
 #' @param p Order of the L_p norm to be used as a ground metric in the computation of the Wasserstein distance.
 #' @return The value for the L_p q-Wassesterstein between \code{d1} and \code{d2}.
+#' @author Tullia Padellini, Francesco Palini. The included C++ library is authored by Michael Kerber, Dmitriy Morozov, and Arnur Nigmetov
 #' @details This function provides an R interface for the efficient C++ library `HERA` by Michael Kerber, Dmitriy Morozov, and Arnur Nigmetov (\url{https://bitbucket.org/grey_narn/hera/src/master/}).
 #' @examples 
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)

@@ -35,3 +35,6 @@ wasserstein.distance(diag1, diag2, dimension = 1, q = 1, p = 2)
 \references{
 \insertRef{kerber2017geometry}{kernelTDA}
 }
+\author{
+Tullia Padellini, Francesco Palini. The included C++ library is authored by Michael Kerber, Dmitriy Morozov, and Arnur Nigmetov
+}
