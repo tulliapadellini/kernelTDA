@@ -1,3 +1,5 @@
+// [[Rcpp::depends(BH)]]
+
 #include <boost/range/counting_range.hpp>
 #include <boost/range/algorithm_ext/push_back.hpp>
 #include <boost/range.hpp>

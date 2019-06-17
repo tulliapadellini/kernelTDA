@@ -1,3 +1,6 @@
+// [[Rcpp::depends(BH)]]
+
+
 #ifndef HERA_WS_PARALLEL_H
 #define HERA_WS_PARALLEL_H
 

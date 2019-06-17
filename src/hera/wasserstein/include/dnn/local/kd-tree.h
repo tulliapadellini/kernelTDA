@@ -1,3 +1,5 @@
+// [[Rcpp::depends(BH)]]
+
 #ifndef HERA_WS_DNN_LOCAL_KD_TREE_H
 #define HERA_WS_DNN_LOCAL_KD_TREE_H
 

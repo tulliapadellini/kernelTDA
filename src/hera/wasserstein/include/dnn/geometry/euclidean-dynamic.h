@@ -1,3 +1,5 @@
+// [[Rcpp::depends(BH)]]
+
 #ifndef DNN_GEOMETRY_EUCLIDEAN_DYNAMIC_H
 #define DNN_GEOMETRY_EUCLIDEAN_DYNAMIC_H
 

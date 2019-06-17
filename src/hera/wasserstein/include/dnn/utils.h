@@ -1,3 +1,6 @@
+// [[Rcpp::depends(BH)]]
+
+
 #ifndef HERA_WS_DNN_UTILS_H
 #define HERA_WS_DNN_UTILS_H
 

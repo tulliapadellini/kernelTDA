@@ -30,7 +30,7 @@ Suggests:
     Matrix, 
     kernlab,
     viridis
-LinkingTo: Rcpp, RcppEigen
+LinkingTo: Rcpp, RcppEigen, BH
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 RdMacros: Rdpack

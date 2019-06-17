@@ -1,3 +1,5 @@
+// [[Rcpp::depends(BH)]]
+
 #ifndef HERA_WS_DNN_GEOMETRY_EUCLIDEAN_FIXED_H
 #define HERA_WS_DNN_GEOMETRY_EUCLIDEAN_FIXED_H
 
