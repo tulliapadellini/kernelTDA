@@ -3,7 +3,7 @@
 // we only include RcppEigen.h which pulls Rcpp.h in for us
 #include <RcppEigen.h>
 
-#include "hera/wasserstein/include/wasserstein.h"
+#include "wasserstein.h"
 
 // [[Rcpp::depends(RcppEigen)]]
 
