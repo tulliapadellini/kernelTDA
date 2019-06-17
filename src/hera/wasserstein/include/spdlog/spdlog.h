@@ -184,4 +184,4 @@ void drop_all();
 }
 
 
-#include "hera/wasserstein/include/spdlog/details/spdlog_impl.h"
+#include "details/spdlog_impl.h"

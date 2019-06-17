@@ -12,12 +12,12 @@
 
 #pragma once
 
-#include "hera/wasserstein/include/spdlog/common.h"
-#include "hera/wasserstein/include/spdlog/sinks/sink.h"
-#include "hera/wasserstein/include/spdlog/details/mpmc_bounded_q.h"
-#include "hera/wasserstein/include/spdlog/details/log_msg.h"
-#include "hera/wasserstein/include/spdlog/details/os.h"
-#include "hera/wasserstein/include/spdlog/formatter.h"
+#include "../common.h"
+#include "../sinks/sink.h"
+#include "mpmc_bounded_q.h"
+#include "log_msg.h"
+#include "os.h"
+#include "../formatter.h"
 
 #include <chrono>
 #include <exception>

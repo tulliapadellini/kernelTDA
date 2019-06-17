@@ -5,12 +5,12 @@
 
 #pragma once
 
-#include "hera/wasserstein/include/spdlog/common.h"
+#include "../common.h"
 
 #ifdef SPDLOG_ENABLE_SYSLOG
 
-#include "hera/wasserstein/include/spdlog/sinks/sink.h"
-#include "hera/wasserstein/include/spdlog/details/log_msg.h"
+#include "sink.h"
+#include "../details/log_msg.h"
 
 #include <array>
 #include <string>

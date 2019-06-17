@@ -5,10 +5,10 @@
 
 #pragma once
 
-#include "hera/wasserstein/include/spdlog/details/log_msg.h"
-#include "hera/wasserstein/include/spdlog/details/null_mutex.h"
-#include "hera/wasserstein/include/spdlog/sinks/base_sink.h"
-#include "hera/wasserstein/include/spdlog/sinks/sink.h"
+#include "../details/log_msg.h"
+#include "../details/null_mutex.h"
+#include "base_sink.h"
+#include "sink.h"
 
 #include <algorithm>
 #include <mutex>

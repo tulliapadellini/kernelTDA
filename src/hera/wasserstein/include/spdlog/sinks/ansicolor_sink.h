@@ -5,9 +5,9 @@
 
 #pragma once
 
-#include "hera/wasserstein/include/spdlog/sinks/base_sink.h"
-#include "hera/wasserstein/include/spdlog/common.h"
-#include "hera/wasserstein/include/spdlog/details/os.h"
+#include "base_sink.h"
+#include "../common.h"
+#include "../details/os.h"
 
 #include <string>
 #include <map>

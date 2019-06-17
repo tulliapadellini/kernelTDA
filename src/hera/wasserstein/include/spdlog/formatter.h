@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "hera/wasserstein/include/spdlog/details/log_msg.h"
+#include "details/log_msg.h"
 
 #include <vector>
 #include <string>
@@ -43,5 +43,5 @@ private:
 };
 }
 
-#include "hera/wasserstein/include/spdlog/details/pattern_formatter_impl.h"
+#include "details/pattern_formatter_impl.h"
 

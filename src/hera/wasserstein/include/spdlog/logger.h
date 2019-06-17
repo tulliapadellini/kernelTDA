@@ -129,4 +129,4 @@ protected:
 };
 }
 
-#include "hera/wasserstein/include/spdlog/details/logger_impl.h"
+#include "details/logger_impl.h"

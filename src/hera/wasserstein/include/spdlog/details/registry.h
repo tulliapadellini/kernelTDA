@@ -10,10 +10,10 @@
 // If user requests a non existing logger, nullptr will be returned
 // This class is thread safe
 
-#include "hera/wasserstein/include/spdlog/details/null_mutex.h"
-#include "hera/wasserstein/include/spdlog/logger.h"
-#include "hera/wasserstein/include/spdlog/async_logger.h"
-#include "hera/wasserstein/include/spdlog/common.h"
+#include "null_mutex.h"
+#include "../logger.h"
+#include "../async_logger.h"
+#include "../common.h"
 
 #include <chrono>
 #include <functional>

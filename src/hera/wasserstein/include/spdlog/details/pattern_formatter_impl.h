@@ -5,10 +5,10 @@
 
 #pragma once
 
-#include "hera/wasserstein/include/spdlog/formatter.h"
-#include "hera/wasserstein/include/spdlog/details/log_msg.h"
-#include "hera/wasserstein/include/spdlog/details/os.h"
-#include "hera/wasserstein/include/spdlog/fmt/fmt.h"
+#include "../formatter.h"
+#include "../details/log_msg.h"
+#include "../details/os.h"
+#include "../fmt/fmt.h"
 
 #include <chrono>
 #include <ctime>

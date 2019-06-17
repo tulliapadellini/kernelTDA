@@ -8,23 +8,23 @@
 //
 // Global registry functions
 //
-#include "hera/wasserstein/include/spdlog/spdlog.h"
-#include "hera/wasserstein/include/spdlog/details/registry.h"
-#include "hera/wasserstein/include/spdlog/sinks/file_sinks.h"
-#include "hera/wasserstein/include/spdlog/sinks/stdout_sinks.h"
+#include "../spdlog.h"
+#include "registry.h"
+#include "../sinks/file_sinks.h"
+#include "../sinks/stdout_sinks.h"
 #ifdef SPDLOG_ENABLE_SYSLOG
-#include "hera/wasserstein/include/spdlog/sinks/syslog_sink.h"
+#include "../sinks/syslog_sink.h"
 #endif
 
 #ifdef _WIN32
-#include "hera/wasserstein/include/spdlog/sinks/wincolor_sink.h"
+#include "../sinks/wincolor_sink.h"
 #else
-#include "hera/wasserstein/include/spdlog/sinks/ansicolor_sink.h"
+#include "../sinks/ansicolor_sink.h"
 #endif
 
 
 #ifdef __ANDROID__
-#include "hera/wasserstein/include/spdlog/sinks/android_sink.h"
+#include "../sinks/android_sink.h"
 #endif
 
 #include <chrono>

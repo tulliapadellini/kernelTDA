@@ -7,7 +7,7 @@
 
 #if defined(__ANDROID__)
 
-#include "hera/wasserstein/include/spdlog/sinks/sink.h"
+#include "sink.h"
 
 #include <mutex>
 #include <string>
