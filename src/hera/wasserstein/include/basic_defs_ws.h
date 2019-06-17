@@ -46,9 +46,9 @@ derivative works thereof, in binary and source code form.
 #endif
 
 #ifndef FOR_R_TDA
-#include "hera/wasserstein/include/spdlog/spdlog.h"
-#include "hera/wasserstein/include/spdlog/fmt/fmt.h"
-#include "hera/wasserstein/include/spdlog/fmt/ostr.h"
+#include "spdlog/spdlog.h"
+#include "spdlog/fmt/fmt.h"
+#include "spdlog/fmt/ostr.h"
 #endif
 
 #include "dnn/geometry/euclidean-dynamic.h"

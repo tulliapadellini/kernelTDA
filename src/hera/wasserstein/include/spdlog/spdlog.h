@@ -9,9 +9,9 @@
 
 #define SPDLOG_VERSION "0.13.0"
 
-#include "hera/wasserstein/include/spdlog/tweakme.h"
-#include "hera/wasserstein/include/spdlog/common.h"
-#include "hera/wasserstein/include/spdlog/logger.h"
+#include "tweakme.h"
+#include "common.h"
+#include "logger.h"
 
 #include <memory>
 #include <functional>

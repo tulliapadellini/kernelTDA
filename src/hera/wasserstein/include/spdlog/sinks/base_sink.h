@@ -10,10 +10,10 @@
 // all locking is taken care of here so no locking needed by the implementers..
 //
 
-#include "hera/wasserstein/include/spdlog/sinks/sink.h"
-#include "hera/wasserstein/include/spdlog/formatter.h"
-#include "hera/wasserstein/include/spdlog/common.h"
-#include "hera/wasserstein/include/spdlog/details/log_msg.h"
+#include "sink.h"
+#include "formatter.h"
+#include "common.h"
+#include "log_msg.h"
 
 #include <mutex>
 

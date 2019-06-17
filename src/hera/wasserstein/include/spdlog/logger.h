@@ -12,8 +12,8 @@
 // 2. Format the message using the formatter function
 // 3. Pass the formatted message to its sinks to performa the actual logging
 
-#include "hera/wasserstein/include/spdlog/sinks/base_sink.h"
-#include "hera/wasserstein/include/spdlog/common.h"
+#include "sinks/base_sink.h"
+#include "common.h"
 
 #include <vector>
 #include <memory>
