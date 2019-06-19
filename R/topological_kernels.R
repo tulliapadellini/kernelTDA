@@ -1,9 +1,6 @@
 L2.wass <- function(d1, d2, h, dimension, pp){
   
-  d1 = d1[d1[,1]==dimension, 2:3, drop = F]
-  d2 = d2[d2[,1]==dimension, 2:3, drop = F]
-  
-  return(exp(-1/h * wasserstein_distance(d1, d2, q = pp,internal_p = 2)))
+  return(exp(-1/h * (wasserstein.distance(d1, d2, dimension = dimension, q = 2, p = 2))^pp ))
   
 }
 
@@ -16,7 +13,6 @@ L2.wass <- function(d1, d2, h, dimension, pp){
 #' @param d2 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).
 #' @param h bandwidth of the kernel.
 #' @param dimension The dimension of the topological feature (0 for connected components, 1 for cycles etc).
-#' @param q order of the q-Wasserstein distance.
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the GGK computed in (\code{d1}[[i]], \code{d2}[[j]]), 
 #' otherwise it returns the value for the GGK computed in (\code{d1}, \code{d2}).
 #' @author Tullia Padellini
@@ -25,15 +21,15 @@ L2.wass <- function(d1, d2, h, dimension, pp){
 #' @examples 
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
 #' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
-#' gaus.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, q = 2)
+#' gaus.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
 #' @export
-gaus.kernel <- function (d1, d2 = NULL, h, dimension, q)
+gaus.kernel <- function (d1, d2 = NULL, h, dimension)
 {
   if(!is.null(d2)) {
-    out = L2.wass(d1, d2, h = h, dimension=dimension, pp = q)
+    out = L2.wass(d1, d2, h = h, dimension=dimension, pp = 2)
   }
   else{
-    k.fun = function(x, y) L2.wass(d1[[x]], d1[[y]], h = h, dimension=dimension, pp = q)
+    k.fun = function(x, y) L2.wass(d1[[x]], d1[[y]], h = h, dimension=dimension, pp = 2)
     k.fun = Vectorize(k.fun)
     d.idx = seq_along(d1)
     out   = outer(d.idx,d.idx, k.fun)
@@ -50,24 +46,23 @@ gaus.kernel <- function (d1, d2 = NULL, h, dimension, q)
 #' @param d2 A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time).
 #' @param h bandwidth of the kernel.
 #' @param dimension The dimension of the topological feature (0 for connected components, 1 for cycles etc)
-#' @param q order of the q-Wasserstein distance.
 #' @return If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the GLK computed in (\code{d1}[[i]], \code{d2}[[j]]),
 #' otherwise it returns the value for the GLK computed in (\code{d1}, \code{d2}).
 #' @author Tullia Padellini
 #' @examples 
 #' diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
 #' diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
-#' lapl.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, q = 2)
+#' lapl.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
 #' @references 
 #' \insertRef{padellini2017supervised}{kernelTDA}
 #' @export
-lapl.kernel <- function (d1, d2 = NULL, h, dimension, q)
+lapl.kernel <- function (d1, d2 = NULL, h, dimension)
 {
   if(!is.null(d2)) {
-    out = L2.wass(d1, d2, h = h, dimension=dimension, pp = q)
+    out = L2.wass(d1, d2, h = h, dimension=dimension, pp = 1)
   }
   else{
-    k.fun = function(x, y) L2.wass(d1[[x]], d1[[y]], h = h, dimension=dimension, pp = q)
+    k.fun = function(x, y) L2.wass(d1[[x]], d1[[y]], h = h, dimension=dimension, pp = 1)
     k.fun = Vectorize(k.fun)
     d.idx = seq_along(d1)
     out   = outer(d.idx,d.idx, k.fun)

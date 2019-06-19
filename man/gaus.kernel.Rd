@@ -4,7 +4,7 @@
 \alias{gaus.kernel}
 \title{Geodesic Gaussian Kernel (GGK)}
 \usage{
-gaus.kernel(d1, d2 = NULL, h, dimension, q)
+gaus.kernel(d1, d2 = NULL, h, dimension)
 }
 \arguments{
 \item{d1}{A persistence diagram (matrix with 3 col where the first one is the dimension, the second is the birth-time and the third is the death-time) or a list of diagrams.}
@@ -14,8 +14,6 @@ gaus.kernel(d1, d2 = NULL, h, dimension, q)
 \item{h}{bandwidth of the kernel.}
 
 \item{dimension}{The dimension of the topological feature (0 for connected components, 1 for cycles etc).}
-
-\item{q}{order of the q-Wasserstein distance.}
 }
 \value{
 If \code{d1} is a list of Persistence Diagrams, this function returns a matrix whose (i,j) entry is the GGK computed in (\code{d1}[[i]], \code{d2}[[j]]), 
@@ -27,7 +25,7 @@ Computes the Geodesic Gaussian Kernel (GGK) between persistence diagrams.
 \examples{
 diag1 <- matrix(c(1,1,1,0,2,3,2,2.5,4), ncol = 3, byrow = FALSE)
 diag2 <- matrix(c(1,1,0,1,1,2), ncol = 3, byrow = FALSE)
-gaus.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1, q = 2)
+gaus.kernel(d1 = diag1, d2 = diag2, h = 1, dimension = 1)
 }
 \references{
 \insertRef{padellini2017supervised}{kernelTDA}
