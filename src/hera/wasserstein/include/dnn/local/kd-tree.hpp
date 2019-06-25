@@ -318,14 +318,14 @@ hera::ws::dnn::KDTree<T>::
 printWeights(void)
 {
 #ifndef FOR_R_TDA
-    std::cout << "weights_:" << std::endl;
-    for(const auto ph : indices_) {
-        std::cout << "idx = " << ph.second << ": (" << (ph.first)->at(0) << ", " << (ph.first)->at(1) << ") weight = " << weights_[ph.second] << std::endl;
-    }
-    std::cout << "subtree_weights_:" << std::endl;
-    for(size_t idx = 0; idx < subtree_weights_.size(); ++idx) {
-        std::cout << idx << " : " << subtree_weights_[idx] << std::endl;
-    }
+    // std::cout << "weights_:" << std::endl;
+    // for(const auto ph : indices_) {
+    //     std::cout << "idx = " << ph.second << ": (" << (ph.first)->at(0) << ", " << (ph.first)->at(1) << ") weight = " << weights_[ph.second] << std::endl;
+    // }
+    // std::cout << "subtree_weights_:" << std::endl;
+    // for(size_t idx = 0; idx < subtree_weights_.size(); ++idx) {
+    //     std::cout << idx << " : " << subtree_weights_[idx] << std::endl;
+    // }
 #endif
 }
 

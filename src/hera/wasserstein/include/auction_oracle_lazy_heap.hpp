@@ -167,7 +167,7 @@ void AuctionOracleLazyHeapRestricted<Real>::set_price(IdxType item_idx, Real new
 {
     assert( this->prices.at(item_idx) < new_price );
 #ifdef DEBUG_AUCTION
-    std::cout << "price incremented by " <<  this->prices.at(item_idx) - new_price << std::endl;
+    //std::cout << "price incremented by " <<  this->prices.at(item_idx) - new_price << std::endl;
 #endif
     this->prices[item_idx] = new_price;
     if (this->items[item_idx].is_normal() ) {

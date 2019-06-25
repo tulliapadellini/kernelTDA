@@ -543,7 +543,7 @@ void AuctionOracleStupidSparseRestricted<k_max_nn, Real_, PointContainer_>::sani
 
         if (true_best_diag_value != best_diagonal_item_value_) {
             console_logger->debug("best_diagonal_item_value_ = {0}, true value = {1}", best_diagonal_item_value_, true_best_diag_value);
-            std::cerr << *this;
+         //   std::cerr << *this;
             //console_logger->debug("{0}", *this);
         }
 

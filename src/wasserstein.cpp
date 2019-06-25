@@ -4,7 +4,6 @@
 #include <RcppEigen.h>
 #include "hera/wasserstein/include/wasserstein.h"
 
-#define FOR_R_TDA
 
 // [[Rcpp::depends(RcppEigen)]]
 

@@ -45,11 +45,11 @@ derivative works thereof, in binary and source code form.
 #include <ciso646>
 #endif
 
-#ifndef FOR_R_TDA
+//#ifndef FOR_R_TDA
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/fmt.h"
 #include "spdlog/fmt/ostr.h"
-#endif
+//#endif
 
 #include "dnn/geometry/euclidean-dynamic.h"
 #include "def_debug_ws.h"

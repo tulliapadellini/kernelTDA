@@ -350,7 +350,7 @@ void AuctionRunnerFR<R, AO>::assign_forward(IdxType item_idx, IdxType bidder_idx
         case 0   : num_forward_normal_to_normal_assignments++;
                    num_forward_normal_from_normal_thefts++;
                    break;
-        default  : std::cerr << "key = " << key << std::endl;
+        default  : //std::cerr << "key = " << key << std::endl;
                    throw std::runtime_error("Bug in logging, wrong key");
                    break;
     }
@@ -441,7 +441,7 @@ void AuctionRunnerFR<R, AO>::assign_reverse(IdxType item_idx, IdxType bidder_idx
         case 0   : num_reverse_normal_to_normal_assignments++;
                    num_reverse_normal_from_normal_thefts++;
                    break;
-        default  : std::cerr << "key = " << key << std::endl;
+        default  : //std::cerr << "key = " << key << std::endl;
                    throw std::runtime_error("Bug in logging, wrong key");
                    break;
     }
@@ -617,23 +617,23 @@ template<class R, class AO>
 void AuctionRunnerFR<R, AO>::print_debug()
 {
 #ifdef DEBUG_FR_AUCTION
-    std::cout << "**********************" << std::endl;
-    std::cout << "Current assignment:" << std::endl;
-    for(size_t idx = 0; idx < bidders_to_items.size(); ++idx) {
+   // std::cout << "**********************" << std::endl;
+   //  std::cout << "Current assignment:" << std::endl;
+   //  for(size_t idx = 0; idx < bidders_to_items.size(); ++idx) {
         std::cout << idx << " <--> " << bidders_to_items[idx] << std::endl;
     }
-    std::cout << "Weights: " << std::endl;
+   //  std::cout << "Weights: " << std::endl;
     //for(size_t i = 0; i < num_bidders; ++i) {
         //for(size_t j = 0; j < num_items; ++j) {
             //std::cout << oracle.weight_matrix[i][j] << " ";
         //}
         //std::cout << std::endl;
     //}
-    std::cout << "Bidder prices: " << std::endl;
-    for(const auto price : forward_oracle.get_prices()) {
-        std::cout << price << std::endl;
-    }
-    std::cout << "**********************" << std::endl;
+    //std::cout << "Bidder prices: " << std::endl;
+    //for(const auto price : forward_oracle.get_prices()) {
+      //  std::cout << price << std::endl;
+    //}
+    //std::cout << "**********************" << std::endl;
 #endif
 }
 
@@ -962,8 +962,8 @@ void AuctionRunnerFR<R, AO>::run_auction()
     wasserstein_cost = partial_cost;
     if (get_relative_error() > delta) {
 #ifndef FOR_R_TDA
-            std::cerr << "Maximum iteration number exceeded, exiting. Current result is: ";
-            std::cerr << get_wasserstein_distance() << std::endl;
+            // std::cerr << "Maximum iteration number exceeded, exiting. Current result is: ";
+            // std::cerr << get_wasserstein_distance() << std::endl;
 #endif
             throw std::runtime_error("Maximum iteration number exceeded");
     }
@@ -1422,15 +1422,15 @@ void AuctionRunnerFR<R, AO>::print_matching()
 {
 #ifdef DEBUG_FR_AUCTION
     sanity_check();
-    for(size_t bidder_idx = 0; bidder_idx < bidders_to_items.size(); ++bidder_idx) {
-        if (bidders_to_items[bidder_idx] >= 0) {
-            auto pA = bidders[bidder_idx];
-            auto pB = items[bidders_to_items[bidder_idx]];
-            std::cout <<  pA << " <-> " << pB << "+" << pow(dist_lp(pA, pB, internal_p), wasserstein_power) << std::endl;
-        } else {
-            assert(false);
-        }
-    }
+    // for(size_t bidder_idx = 0; bidder_idx < bidders_to_items.size(); ++bidder_idx) {
+    //     if (bidders_to_items[bidder_idx] >= 0) {
+    //         auto pA = bidders[bidder_idx];
+    //         auto pB = items[bidders_to_items[bidder_idx]];
+    //         std::cout <<  pA << " <-> " << pB << "+" << pow(dist_lp(pA, pB, internal_p), wasserstein_power) << std::endl;
+    //     } else {
+    //         assert(false);
+    //     }
+    // }
 #endif
 }
 

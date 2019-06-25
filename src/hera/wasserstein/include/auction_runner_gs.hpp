@@ -288,8 +288,8 @@ void AuctionRunnerGS<R, AO, PC>::run_auction()
     is_distance_computed = true;
     if (relative_error > delta) {
 #ifndef FOR_R_TDA
-            std::cerr << "Maximum iteration number exceeded, exiting. Current result is: ";
-            std::cerr << pow(wasserstein_cost, 1.0/wasserstein_power) << std::endl;
+            // std::cerr << "Maximum iteration number exceeded, exiting. Current result is: ";
+            // std::cerr << pow(wasserstein_cost, 1.0/wasserstein_power) << std::endl;
 #endif
             throw std::runtime_error("Maximum iteration number exceeded");
     }
@@ -311,7 +311,7 @@ void AuctionRunnerGS<R, AO, PC>::run_auction_phase()
         //print_debug();
 #ifdef FOR_R_TDA
         if ( num_rounds % 10000 == 0 ) {
-            Rcpp::check_user_interrupt();
+            Rcpp::checkUserInterrupt();
         }
 #endif
     } while (not unassigned_bidders.empty());
@@ -320,8 +320,8 @@ void AuctionRunnerGS<R, AO, PC>::run_auction_phase()
 #ifdef DEBUG_AUCTION
     for(size_t bidder_idx = 0; bidder_idx < num_bidders; ++bidder_idx) {
         if ( bidders_to_items[bidder_idx] < 0 or bidders_to_items[bidder_idx] >= num_bidders) {
-            std::cerr << "After auction terminated bidder " << bidder_idx;
-            std::cerr << " has no items assigned" << std::endl;
+            // std::cerr << "After auction terminated bidder " << bidder_idx;
+            // std::cerr << " has no items assigned" << std::endl;
             throw std::runtime_error("Auction did not give a perfect matching");
         }
     }
@@ -380,23 +380,23 @@ void AuctionRunnerGS<R, AO, PC>::print_debug()
 {
 #ifdef DEBUG_AUCTION
     sanity_check();
-    std::cout << "**********************" << std::endl;
-    std::cout << "Current assignment:" << std::endl;
-    for(size_t idx = 0; idx < bidders_to_items.size(); ++idx) {
-        std::cout << idx << " <--> " << bidders_to_items[idx] << std::endl;
-    }
-    std::cout << "Weights: " << std::endl;
-    //for(size_t i = 0; i < num_bidders; ++i) {
-        //for(size_t j = 0; j < num_items; ++j) {
-            //std::cout << oracle.weight_matrix[i][j] << " ";
-        //}
-        //std::cout << std::endl;
-    //}
-    std::cout << "Prices: " << std::endl;
-    for(const auto price : oracle.get_prices()) {
-        std::cout << price << std::endl;
-    }
-    std::cout << "**********************" << std::endl;
+    // std::cout << "**********************" << std::endl;
+    // std::cout << "Current assignment:" << std::endl;
+    // for(size_t idx = 0; idx < bidders_to_items.size(); ++idx) {
+    //     std::cout << idx << " <--> " << bidders_to_items[idx] << std::endl;
+    // }
+    // std::cout << "Weights: " << std::endl;
+    // //for(size_t i = 0; i < num_bidders; ++i) {
+    //     //for(size_t j = 0; j < num_items; ++j) {
+    //         //std::cout << oracle.weight_matrix[i][j] << " ";
+    //     //}
+    //     //std::cout << std::endl;
+    // //}
+    // std::cout << "Prices: " << std::endl;
+    // for(const auto price : oracle.get_prices()) {
+    //     std::cout << price << std::endl;
+    // }
+    // std::cout << "**********************" << std::endl;
 #endif
 }
 
@@ -406,12 +406,12 @@ void AuctionRunnerGS<R, AO, PC>::sanity_check()
 {
 #ifdef DEBUG_AUCTION
     if (bidders_to_items.size() != num_bidders) {
-        std::cerr << "Wrong size of bidders_to_items, must be " << num_bidders << ", is " << bidders_to_items.size() << std::endl;
+        // std::cerr << "Wrong size of bidders_to_items, must be " << num_bidders << ", is " << bidders_to_items.size() << std::endl;
         throw std::runtime_error("Wrong size of bidders_to_items");
     }
 
     if (items_to_bidders.size() != num_bidders) {
-        std::cerr << "Wrong size of items_to_bidders, must be " << num_bidders << ", is " << items_to_bidders.size() << std::endl;
+        // std::cerr << "Wrong size of items_to_bidders, must be " << num_bidders << ", is " << items_to_bidders.size() << std::endl;
         throw std::runtime_error("Wrong size of items_to_bidders");
     }
 
@@ -423,17 +423,17 @@ void AuctionRunnerGS<R, AO, PC>::sanity_check()
             if ( std::count(bidders_to_items.begin(),
                         bidders_to_items.end(),
                         bidders_to_items[bidder_idx]) > 1 ) {
-                std::cerr << "Item " << bidders_to_items[bidder_idx];
-                std::cerr << " appears in bidders_to_items more than once" << std::endl;
+                // std::cerr << "Item " << bidders_to_items[bidder_idx];
+                // std::cerr << " appears in bidders_to_items more than once" << std::endl;
                 throw std::runtime_error("Duplicate in bidders_to_items");
             }
 
             if (items_to_bidders.at(bidders_to_items[bidder_idx]) != static_cast<int>(bidder_idx)) {
-                std::cerr << "Inconsitency: bidder_idx = " << bidder_idx;
-                std::cerr << ", item_idx in bidders_to_items = ";
-                std::cerr << bidders_to_items[bidder_idx];
-                std::cerr << ", bidder_idx in items_to_bidders = ";
-                std::cerr << items_to_bidders[bidders_to_items[bidder_idx]] << std::endl;
+                // std::cerr << "Inconsitency: bidder_idx = " << bidder_idx;
+                // std::cerr << ", item_idx in bidders_to_items = ";
+                // std::cerr << bidders_to_items[bidder_idx];
+                // std::cerr << ", bidder_idx in items_to_bidders = ";
+                // std::cerr << items_to_bidders[bidders_to_items[bidder_idx]] << std::endl;
                 throw std::runtime_error("inconsistent mapping");
             }
         }
@@ -447,17 +447,17 @@ void AuctionRunnerGS<R, AO, PC>::sanity_check()
             if ( std::count(items_to_bidders.begin(),
                         items_to_bidders.end(),
                         items_to_bidders[item_idx]) > 1 ) {
-                std::cerr << "Bidder " << items_to_bidders[item_idx];
-                std::cerr << " appears in items_to_bidders more than once" << std::endl;
+                // std::cerr << "Bidder " << items_to_bidders[item_idx];
+                // std::cerr << " appears in items_to_bidders more than once" << std::endl;
                 throw std::runtime_error("Duplicate in items_to_bidders");
             }
             // check for consistency
             if (bidders_to_items.at(items_to_bidders.at(item_idx)) != static_cast<int>(item_idx)) {
-                std::cerr << "Inconsitency: item_idx = " << item_idx;
-                std::cerr << ", bidder_idx in items_to_bidders = ";
-                std::cerr << items_to_bidders[item_idx];
-                std::cerr << ", item_idx in bidders_to_items= ";
-                std::cerr << bidders_to_items[items_to_bidders[item_idx]] << std::endl;
+                // std::cerr << "Inconsitency: item_idx = " << item_idx;
+                // std::cerr << ", bidder_idx in items_to_bidders = ";
+                // std::cerr << items_to_bidders[item_idx];
+                // std::cerr << ", item_idx in bidders_to_items= ";
+                // std::cerr << bidders_to_items[items_to_bidders[item_idx]] << std::endl;
                 throw std::runtime_error("inconsistent mapping");
             }
         }
@@ -474,7 +474,7 @@ void AuctionRunnerGS<R, AO, PC>::print_matching()
         if (bidders_to_items[bIdx] != k_invalid_index) {
             auto pA = bidders[bIdx];
             auto pB = items[bidders_to_items[bIdx]];
-            std::cout <<  pA << " <-> " << pB << "+" << pow(dist_lp(pA, pB, internal_p, dimension), wasserstein_power) << std::endl;
+            // std::cout <<  pA << " <-> " << pB << "+" << pow(dist_lp(pA, pB, internal_p, dimension), wasserstein_power) << std::endl;
         } else {
             assert(false);
         }

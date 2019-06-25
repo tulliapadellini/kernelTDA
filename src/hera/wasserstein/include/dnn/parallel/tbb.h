@@ -89,7 +89,7 @@ namespace dnn
     {
                         progress_timer(): start(tbb::tick_count::now())                 {}
                         ~progress_timer()
-                        { std::cout << (tbb::tick_count::now() - start).seconds() << " s" << std::endl; }
+                        { //std::cout << (tbb::tick_count::now() - start).seconds() << " s" << std::endl; }
 
         tbb::tick_count start;
     };

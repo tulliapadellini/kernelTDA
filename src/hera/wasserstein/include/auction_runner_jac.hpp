@@ -319,21 +319,21 @@ namespace ws {
     void AuctionRunnerJac<R, AO, PC>::print_debug() {
 #ifdef DEBUG_AUCTION
         sanity_check();
-        std::cout << "**********************" << std::endl;
-        std::cout << "Current assignment:" << std::endl;
+        // std::cout << "**********************" << std::endl;
+        // std::cout << "Current assignment:" << std::endl;
         for(size_t idx = 0; idx < bidders_to_items.size(); ++idx) {
-            std::cout << idx << " <--> " << bidders_to_items[idx] << std::endl;
+            // std::cout << idx << " <--> " << bidders_to_items[idx] << std::endl;
         }
-        std::cout << "Weights: " << std::endl;
+        // std::cout << "Weights: " << std::endl;
         //for(size_t i = 0; i < num_bidders; ++i) {
             //for(size_t j = 0; j < num_items; ++j) {
                 //std::cout << oracle.weight_matrix[i][j] << " ";
             //}
             //std::cout << std::endl;
         //}
-        std::cout << "Prices: " << std::endl;
+        // std::cout << "Prices: " << std::endl;
         for(const auto price : oracle.get_prices()) {
-            std::cout << price << std::endl;
+            // std::cout << price << std::endl;
         }
         //std::cout << "Value matrix: " << std::endl;
         //for(size_t i = 0; i < num_bidders; ++i) {
@@ -342,7 +342,7 @@ namespace ws {
             //}
             //std::cout << std::endl;
         //}
-        std::cout << "**********************" << std::endl;
+        // std::cout << "**********************" << std::endl;
 #endif
     }
 
@@ -566,8 +566,8 @@ namespace ws {
         wasserstein_cost = partial_cost;
         if (not is_done()) {
 #ifndef FOR_R_TDA
-            std::cerr << "Maximum iteration number exceeded, exiting. Current result is: ";
-            std::cerr << get_wasserstein_distance() << std::endl;
+            // std::cerr << "Maximum iteration number exceeded, exiting. Current result is: ";
+            // std::cerr << get_wasserstein_distance() << std::endl;
 #endif
             throw std::runtime_error("Maximum iteration number exceeded");
         }
@@ -795,12 +795,12 @@ namespace ws {
     {
 #ifdef DEBUG_AUCTION
         if (bidders_to_items.size() != num_bidders) {
-            std::cerr << "Wrong size of bidders_to_items, must be " << num_bidders << ", is " << bidders_to_items.size() << std::endl;
+            // std::cerr << "Wrong size of bidders_to_items, must be " << num_bidders << ", is " << bidders_to_items.size() << std::endl;
             throw "Wrong size of bidders_to_items";
         }
 
         if (items_to_bidders.size() != num_bidders) {
-            std::cerr << "Wrong size of items_to_bidders, must be " << num_bidders << ", is " << items_to_bidders.size() << std::endl;
+            // std::cerr << "Wrong size of items_to_bidders, must be " << num_bidders << ", is " << items_to_bidders.size() << std::endl;
             throw "Wrong size of items_to_bidders";
         }
 
@@ -810,17 +810,17 @@ namespace ws {
                 if ( std::count(bidders_to_items.begin(),
                             bidders_to_items.end(),
                             bidders_to_items[bidder_idx]) > 1 ) {
-                    std::cerr << "Good " << bidders_to_items[bidder_idx];
-                    std::cerr << " appears in bidders_to_items more than once" << std::endl;
+                    // std::cerr << "Good " << bidders_to_items[bidder_idx];
+                    // std::cerr << " appears in bidders_to_items more than once" << std::endl;
                     throw "Duplicate in bidders_to_items";
                 }
 
                 if (items_to_bidders.at(bidders_to_items[bidder_idx]) != static_cast<int>(bidder_idx)) {
-                    std::cerr << "Inconsitency: bidder_idx = " << bidder_idx;
-                    std::cerr << ", item_idx in bidders_to_items = ";
-                    std::cerr << bidders_to_items[bidder_idx];
-                    std::cerr << ", bidder_idx in items_to_bidders = ";
-                    std::cerr << items_to_bidders[bidders_to_items[bidder_idx]] << std::endl;
+                    // std::cerr << "Inconsitency: bidder_idx = " << bidder_idx;
+                    // std::cerr << ", item_idx in bidders_to_items = ";
+                    // std::cerr << bidders_to_items[bidder_idx];
+                    // std::cerr << ", bidder_idx in items_to_bidders = ";
+                    // std::cerr << items_to_bidders[bidders_to_items[bidder_idx]] << std::endl;
                     throw "inconsistent mapping";
                 }
             }
@@ -833,17 +833,17 @@ namespace ws {
                 if ( std::count(items_to_bidders.begin(),
                             items_to_bidders.end(),
                             items_to_bidders[item_idx]) > 1 ) {
-                    std::cerr << "Bidder " << items_to_bidders[item_idx];
-                    std::cerr << " appears in items_to_bidders more than once" << std::endl;
+                    // srerr << "Bidder " << items_to_bidders[item_idx];
+                    // srerr << " appears in items_to_bidders more than once" << std::endl;
                     throw "Duplicate in items_to_bidders";
                 }
                 // check for consistency
                 if (bidders_to_items.at(items_to_bidders[item_idx]) != static_cast<int>(item_idx)) {
-                    std::cerr << "Inconsitency: item_idx = " << item_idx;
-                    std::cerr << ", bidder_idx in items_to_bidders = ";
-                    std::cerr << items_to_bidders[item_idx];
-                    std::cerr << ", item_idx in bidders_to_items= ";
-                    std::cerr << bidders_to_items[items_to_bidders[item_idx]] << std::endl;
+                    // srerr << "Inconsitency: item_idx = " << item_idx;
+                    // srerr << ", bidder_idx in items_to_bidders = ";
+                    // srerr << items_to_bidders[item_idx];
+                    // srerr << ", item_idx in bidders_to_items= ";
+                    // srerr << bidders_to_items[items_to_bidders[item_idx]] << std::endl;
                     throw "inconsistent mapping";
                 }
             }
@@ -859,7 +859,7 @@ namespace ws {
             if (bidders_to_items[bidder_idx] >= 0) {
                 auto pA = bidders[bidder_idx];
                 auto pB = items[bidders_to_items[bidder_idx]];
-                std::cout <<  pA << " <-> " << pB << "+" << pow(dist_lp(pA, pB, internal_p, dimension), wasserstein_power) << std::endl;
+                // srout <<  pA << " <-> " << pB << "+" << pow(dist_lp(pA, pB, internal_p, dimension), wasserstein_power) << std::endl;
             } else {
                 assert(false);
             }

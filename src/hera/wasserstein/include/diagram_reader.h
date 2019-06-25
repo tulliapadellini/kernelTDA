@@ -94,7 +94,7 @@ bool read_diagram_point_set(const char* fname, ContType_& result, int& decPrecis
     std::ifstream f(fname);
     if (!f.good()) {
 #ifndef FOR_R_TDA
-        std::cerr << "Cannot open file " << fname << std::endl;
+        //std::cerr << "Cannot open file " << fname << std::endl;
 #endif
         return false;
     }
@@ -155,13 +155,13 @@ bool read_diagram_point_set(const char* fname, ContType_& result, int& decPrecis
         }
         catch (const std::invalid_argument& e) {
 #ifndef FOR_R_TDA
-            std::cerr << "Error in file " << fname << ", line number " << lineNumber << ": cannot parse \"" << line << "\"" << std::endl;
+           // std::cerr << "Error in file " << fname << ", line number " << lineNumber << ": cannot parse \"" << line << "\"" << std::endl;
 #endif
             return false;
         }
         catch (const std::out_of_range&) {
 #ifndef FOR_R_TDA
-            std::cerr << "Error while reading file " << fname << ", line number " << lineNumber << ": value too large in \"" << line << "\"" << std::endl;
+           // std::cerr << "Error while reading file " << fname << ", line number " << lineNumber << ": value too large in \"" << line << "\"" << std::endl;
 #endif
             return false;
         }
@@ -272,7 +272,7 @@ bool read_point_cloud(const char* fname, hera::ws::dnn::DynamicPointVector<RealT
     std::ifstream f(fname);
     if (!f.good()) {
 #ifndef FOR_R_TDA
-        std::cerr << "Cannot open file " << fname << std::endl;
+        //std::cerr << "Cannot open file " << fname << std::endl;
 #endif
         return false;
     }
@@ -331,7 +331,7 @@ bool read_point_cloud(const char* fname, hera::ws::dnn::DynamicPointVector<RealT
         for(int d = 0; d < dimension; ++d) {
             if (not(iss >> x)) {
 #ifndef FOR_R_TDA
-                std::cerr << "Error in file " << fname << ", line number " << lineNumber << ": cannot parse \"" << line << "\"" << std::endl;
+               // std::cerr << "Error in file " << fname << ", line number " << lineNumber << ": cannot parse \"" << line << "\"" << std::endl;
 #endif
                 return false;
             }
