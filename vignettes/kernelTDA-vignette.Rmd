@@ -69,7 +69,7 @@ library(TDA)
 x1 = circleUnif(100)
 x2 = cbind(runif(100), runif(100))
 ```
-Using the package [TDA]() we can build a Persistence Diagram from each sample, as follows:
+Using the package [TDA](https://CRAN.R-project.org/package=TDA) we can build a Persistence Diagram from each sample, as follows:
 ```{r}
 diag1 = ripsDiag(x1, maxdimension = 1, maxscale = 1)$diagram
 diag2 = ripsDiag(x2, maxdimension = 1, maxscale = 1)$diagram
@@ -136,12 +136,12 @@ for(i in 21:40){
 Let us consider for example clustering. Suppose we have stored the diagrams in a list called `foo.data`, whose first $20$ elements are diagram from Model $1$ and last $20$ from Model $2$. We can build a kernel matrix as: 
 
 ```{r, fig.align = "center", fig.height= 5, fig.width= 4}
-GSWkernel = gaus.kernel(foo.data, h =1, dimension = 1,  q = 2)
+GSWkernel = gaus.kernel(foo.data, h =1, dimension = 1)
 image(GSWkernel, col = viridis::viridis(100, option = "A"), main = "Kernel Matrix", axes = F)
 
 ```
 
-and then feed it into any standard kernel algorithm. If we choose to use kernel spectral clustering as implemented in the package [kernlab](https://cran.r-project.org/web/packages/kernlab/index.html) for example:
+and then feed it into any standard kernel algorithm. If we choose to use kernel spectral clustering as implemented in the package [kernlab](https://CRAN.R-project.org/package=kernlab) for example:
 
 ```{r}
 library(kernlab)
@@ -164,7 +164,7 @@ PSSclass
 ```
 
 
-The Geodesic Gaussian and the Geodesic Laplacian Kernels are however not positive semi-definite, hence the standard SVM solver cannot be directly used with them. To overcome this problem we implemented the extension of kernel Support Vector Machine to the case of indefinite kernels introduced by [Loosli et al.](https://hal.archives-ouvertes.fr/hal-01593553/document). The implementation is largely based on the C++ library [LIBSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/), and on its R interface in the package [e1071](https://cran.r-project.org/web/packages/e1071/index.html).
+The Geodesic Gaussian and the Geodesic Laplacian Kernels are however not positive semi-definite, hence the standard SVM solver cannot be directly used with them. To overcome this problem we implemented the extension of kernel Support Vector Machine to the case of indefinite kernels introduced by [Loosli et al.](https://hal.archives-ouvertes.fr/hal-01593553/document). The implementation is largely based on the C++ library [LIBSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/), and on its R interface in the package [e1071](https://CRAN.R-project.org/package=e1071).
 
 In order to perform the same classification task as before using the already computed Geodesic Gaussian kernel we can use the following function:
 ```{r}
