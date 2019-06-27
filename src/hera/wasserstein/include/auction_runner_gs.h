@@ -32,7 +32,6 @@ derivative works thereof, in binary and source code form.
 #include <memory>
 #include <unordered_set>
 
-#include "spdlog/spdlog.h"
 #include "auction_oracle.h"
 
 namespace hera {
@@ -98,19 +97,6 @@ public:
     int num_phase { 0 };
     int num_rounds { 0 };
     bool is_distance_computed {false};
-#ifdef LOG_AUCTION
-    bool log_auction { false };
-    std::shared_ptr<spdlog::logger> console_logger;
-    std::shared_ptr<spdlog::logger> plot_logger;
-    std::unordered_set<size_t> unassigned_items;
-    size_t max_unassigned_to_log { 0 };
-    const char* logger_name = "auction_detailed_logger"; // the name in spdlog registry; filename is provided as parameter in enable_logging
-    const Real total_items_persistence;
-    const Real total_bidders_persistence;
-    Real partial_cost;
-    Real unassigned_bidders_persistence;
-    Real unassigned_items_persistence;
-#endif
 };
 
 } // ws

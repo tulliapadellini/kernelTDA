@@ -7,7 +7,6 @@
 #' @docType package
 #' @name kernelTDA
 #' @useDynLib kernelTDA
-#' @import RcppEigen
 #' @importFrom Rcpp evalCpp
 #' @importFrom Rcpp sourceCpp
 #' @importFrom Rdpack reprompt

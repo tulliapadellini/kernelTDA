@@ -50,37 +50,6 @@ namespace ws {
 
 
 
-template <class Real_, class PointContainer_>
-std::ostream& operator<<(std::ostream& output, const AuctionOracleKDTreeRestricted<Real_, PointContainer_>& oracle)
-{
-    output << "Oracle " << &oracle << std::endl;
-    output << fmt::format("       max_val_ = {0}, best_diagonal_items_computed_ = {1}, best_diagonal_item_value_ = {2}, second_best_diagonal_item_idx_ = {3}, second_best_diagonal_item_value_ = {4}\n",
-                          oracle.max_val_,
-                          oracle.best_diagonal_items_computed_,
-                          oracle.best_diagonal_item_value_,
-                          oracle.second_best_diagonal_item_idx_,
-                          oracle.second_best_diagonal_item_value_);
-
-    output << fmt::format("       prices = {0}\n",
-                          format_container_to_log(oracle.prices));
-
-    output << fmt::format("       diag_items_heap_ = {0}\n",
-                          losses_heap_to_string(oracle.diag_items_heap_));
-
-
-    output << fmt::format("       top_diag_indices_ = {0}\n",
-                          format_container_to_log(oracle.top_diag_indices_));
-
-    output << fmt::format("       top_diag_counter_ = {0}\n",
-                          oracle.top_diag_counter_);
-
-    output << fmt::format("       top_diag_lookup_ = {0}\n",
-                          format_container_to_log(oracle.top_diag_lookup_));
-
-
-    output << "end of oracle " << &oracle << std::endl;
-    return output;
-}
 
 
 template<class Real_, class PointContainer_>
@@ -130,12 +99,7 @@ AuctionOracleKDTreeRestricted<Real_, PointContainer_>::AuctionOracleKDTreeRestri
     max_val_ = std::pow(max_val_, params.wasserstein_power);
     weight_adj_const_ = max_val_;
 
-    console_logger = spdlog::get("console");
-    if (not console_logger) {
-        console_logger = spdlog::stdout_logger_st("console");
-    }
-    console_logger->set_pattern("[%H:%M:%S.%e] %v");
-    console_logger->debug("KDTree Restricted oracle ctor done");
+
 }
 
 
@@ -201,7 +165,6 @@ void AuctionOracleKDTreeRestricted<Real_, PointContainer_>::reset_top_diag_count
 template<class Real_, class PointContainer_>
 void AuctionOracleKDTreeRestricted<Real_, PointContainer_>::recompute_top_diag_items(bool hard)
 {
-    console_logger->debug("Enter recompute_top_diag_items, hard = {0}", hard);
     assert(hard or top_diag_indices_.empty());
 
     if (hard) {
@@ -229,7 +192,6 @@ void AuctionOracleKDTreeRestricted<Real_, PointContainer_>::recompute_top_diag_i
 
     best_diagonal_items_computed_ = true;
     reset_top_diag_counter();
-    console_logger->debug("Exit recompute_top_diag_items, hard = {0}", hard);
 }
 
 template<class Real_, class PointContainer_>
@@ -368,20 +330,6 @@ IdxValPair<Real_> AuctionOracleKDTreeRestricted<Real_, PointContainer_>::get_opt
     result.first = best_item_idx;
     result.second = ( second_best_item_value - best_item_value ) + this->prices[best_item_idx] + this->epsilon;
 
-#ifdef DEBUG_KDTREE_RESTR_ORACLE
-    auto db = get_optimal_bid_debug(bidder_idx);
-    assert(fabs(db.best_item_value - best_item_value) < 0.000001);
-    if (fabs(db.second_best_item_value - second_best_item_value) >= 0.000001) {
-        console_logger->debug("Bidder_idx = {0}, best_item_idx = {1}, true_best_item_idx = {2}", bidder_idx, best_item_idx, db.best_item_idx);
-        console_logger->debug("second_best_item_idx = {0}, true second_best_item_idx = {1}", second_best_item_idx, db.second_best_item_idx);
-        console_logger->debug("second_best_value = {0}, true second_best_item_value = {1}", second_best_item_value, db.second_best_item_value);
-        console_logger->debug("prices = {0}", format_container_to_log(this->prices));
-        console_logger->debug("top_diag_indices_ = {0}", format_container_to_log(top_diag_indices_));
-        console_logger->debug("second_best_diagonal_item_value_ = {0}", second_best_diagonal_item_value_);
-    }
-    assert(fabs(db.second_best_item_value - second_best_item_value) < 0.000001);
-    //std::cout << "bid OK" << std::endl;
-#endif
 
     return result;
 }
@@ -393,7 +341,6 @@ template<class Real_, class PointContainer_>
 void AuctionOracleKDTreeRestricted<Real_, PointContainer_>::recompute_second_best_diag()
 {
 
-    console_logger->debug("Enter recompute_second_best_diag");
 
     if (top_diag_indices_.size() > 1) {
         second_best_diagonal_item_value_ = best_diagonal_item_value_;
@@ -410,7 +357,6 @@ void AuctionOracleKDTreeRestricted<Real_, PointContainer_>::recompute_second_bes
         }
     }
 
-    console_logger->debug("Exit recompute_second_best_diag, second_best_diagonal_item_value_ = {0}, second_best_diagonal_item_idx_ = {1}", second_best_diagonal_item_value_, second_best_diagonal_item_idx_);
 }
 
 
@@ -420,7 +366,6 @@ void AuctionOracleKDTreeRestricted<Real_, PointContainer_>::set_price(IdxType it
                                                     const bool update_diag)
 {
 
-    console_logger->debug("Enter set_price, item_idx = {0}, new_price = {1}, old price = {2}, update_diag = {3}", item_idx, new_price, this->prices[item_idx], update_diag);
 
     assert(this->prices.size() == this->items.size());
     assert( 0 < diag_heap_handles_.size() and diag_heap_handles_.size() <= this->items.size());
@@ -455,7 +400,6 @@ void AuctionOracleKDTreeRestricted<Real_, PointContainer_>::set_price(IdxType it
         }
     }
 
-    console_logger->debug("Exit set_price, item_idx = {0}, new_price = {1}", item_idx, new_price);
 }
 
 

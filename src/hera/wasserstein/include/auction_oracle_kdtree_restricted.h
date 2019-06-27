@@ -37,7 +37,6 @@ derivative works thereof, in binary and source code form.
 #include <set>
 
 
-#include "spdlog/spdlog.h"
 #include "basic_defs_ws.h"
 #include "diagonal_heap.h"
 #include "auction_oracle_base.h"
@@ -104,7 +103,6 @@ struct AuctionOracleKDTreeRestricted : AuctionOracleBase<Real_, PointContainer_>
     void remove_top_diag_index(const size_t item_idx);
     bool is_in_top_diag_indices(const size_t item_idx) const;
 
-    std::shared_ptr<spdlog::logger> console_logger;
 
     std::pair<Real, Real> get_minmax_price() const;
 

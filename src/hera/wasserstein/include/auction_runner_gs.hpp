@@ -93,39 +93,11 @@ AuctionRunnerGS<R, AO, PC>::AuctionRunnerGS(const PC& A,
     assert(initial_epsilon >= 0.0 );
     assert(epsilon_common_ratio >= 0.0 );
     assert(A.size() == B.size());
-#ifdef LOG_AUCTION
 
-    unassigned_items_persistence = total_items_persistence;
-    unassigned_bidders_persistence = total_bidders_persistence;
-
-    console_logger = spdlog::get("console");
-    if (not console_logger) {
-        console_logger = spdlog::stdout_logger_st("console");
-    }
-    console_logger->set_pattern("[%H:%M:%S.%e] %v");
-    console_logger->debug("Gauss-Seidel, num_bidders = {0}", num_bidders);
-
-    plot_logger = spdlog::get("plot_logger");
-    if (not plot_logger) {
-        plot_logger = spdlog::basic_logger_st("plot_logger", "plot_logger.txt");
-        plot_logger->info("New plot starts here");
-        plot_logger->set_pattern("%v");
-    }
-#endif
 
 }
 
-#ifdef LOG_AUCTION
-template<class R, class AO, class PC>
-void AuctionRunnerGS<R, AO, PC>::enable_logging(const char* log_filename, const size_t _max_unassigned_to_log)
-{
-    log_auction = true;
-    max_unassigned_to_log = _max_unassigned_to_log;
 
-    auto log = spdlog::basic_logger_st(logger_name, log_filename);
-    log->set_pattern("%v");
-}
-#endif
 
 template<class R, class AO, class PC>
 void AuctionRunnerGS<R, AO, PC>::assign_item_to_bidder(IdxType item_idx, IdxType bidder_idx)
@@ -149,56 +121,6 @@ void AuctionRunnerGS<R, AO, PC>::assign_item_to_bidder(IdxType item_idx, IdxType
     }
 
 
-#ifdef LOG_AUCTION
-
-    partial_cost += get_item_bidder_cost(item_idx, bidder_idx, true);
-    partial_cost -= get_item_bidder_cost(item_idx, old_item_owner, true);
-
-    unassigned_items.erase(item_idx);
-
-    unassigned_bidders_persistence -= std::pow(bidders[bidder_idx].persistence_lp(internal_p), wasserstein_power);
-
-    if (old_item_owner != k_invalid_index) {
-        // item has been assigned to some other bidder,
-        // and he became unassigned
-        unassigned_bidders_persistence += std::pow(bidders[old_item_owner].persistence_lp(internal_p), wasserstein_power);
-    } else {
-        // item was unassigned before
-        unassigned_items_persistence -= std::pow(items[item_idx].persistence_lp(internal_p), wasserstein_power);
-    }
-
-    if (log_auction)
-        plot_logger->info("{0} {1} {2} {3} {4} {5} {6} {7} {8} {9}",
-                          num_phase,
-                          num_rounds,
-                          unassigned_bidders.size(),
-                          unassigned_items_persistence,
-                          unassigned_bidders_persistence,
-                          unassigned_items_persistence + unassigned_bidders_persistence,
-                          partial_cost,
-                          total_bidders_persistence,
-                          total_items_persistence,
-                          oracle.get_epsilon()
-                          );
-
-
-    if (log_auction and unassigned_bidders.size() <= max_unassigned_to_log) {
-        auto logger = spdlog::get(logger_name);
-        if (logger) {
-            auto item = items[item_idx];
-            auto bidder = bidders[bidder_idx];
-            logger->info("{0} # ({1}, {2}) # ({3}, {4}) # {5} # {6} # {7}",
-                         num_rounds,
-                         item.getRealX(),
-                         item.getRealY(),
-                         bidder.getRealX(),
-                         bidder.getRealY(),
-                         format_point_set_to_log(unassigned_bidders, bidders),
-                         format_point_set_to_log(unassigned_items, items),
-                         oracle.get_epsilon());
-        }
-    }
-#endif
 }
 
 

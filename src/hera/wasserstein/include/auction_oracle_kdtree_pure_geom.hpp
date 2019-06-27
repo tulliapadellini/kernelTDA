@@ -91,12 +91,7 @@ AuctionOracleKDTreePureGeom<Real_, PointContainer_>::AuctionOracleKDTreePureGeom
     max_val_ = std::pow(max_val_, params.wasserstein_power);
     weight_adj_const_ = max_val_;
 
-    console_logger = spdlog::get("console");
-    if (not console_logger) {
-        console_logger = spdlog::stdout_logger_st("console");
-    }
-    console_logger->set_pattern("[%H:%M:%S.%e] %v");
-    console_logger->debug("KDTree Restricted oracle ctor done");
+    
 }
 
 

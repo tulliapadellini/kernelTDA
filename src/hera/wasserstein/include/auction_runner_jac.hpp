@@ -120,74 +120,7 @@ namespace ws {
         }
 #endif
 
-#ifdef LOG_AUCTION
-        parallel_threshold = 16;
-        console_logger = spdlog::get("console");
-        if (not console_logger) {
-            console_logger = spdlog::stdout_logger_st("console");
-        }
-        console_logger->set_pattern("[%H:%M:%S.%e] %v");
-#ifdef ORDERED_BY_PERSISTENCE
-        if (max_bids_per_round == 1) {
-            console_logger->info("Gauss-Seidel imitated by Jacobi runner, q = {0}, max_bids_per_round = {1}, batch_size = {4}, gamma_threshold = {2}, diag_first = {3} ORDERED_BY_PERSISTENCE",
-                              wasserstein_power,
-                              max_bids_per_round,
-                              gamma_threshold,
-                              diag_first,
-                              batch_size);
-        } else {
-            console_logger->info("Jacobi runner, q = {0}, max_bids_per_round = {1}, batch_size = {4},  gamma_threshold = {2}, diag_first = {3} ORDERED_BY_PERSISTENCE",
-                              wasserstein_power,
-                              max_bids_per_round,
-                              gamma_threshold,
-                              diag_first,
-                              batch_size);
-        }
 
-#else
-        if (max_bids_per_round == 1) {
-            console_logger->info(
-                    "Gauss-Seidel imitated by Jacobi runner, q = {0}, max_bids_per_round = {1}, batch_size = {4}, gamma_threshold = {2}, diag_first = {3}",
-                    wasserstein_power,
-                    max_bids_per_round,
-                    gamma_threshold,
-                    diag_first,
-                    batch_size);
-        } else {
-            console_logger->info(
-                    "Jacobi runner, q = {0}, max_bids_per_round = {1}, batch_size = {4},  gamma_threshold = {2}, diag_first = {3}",
-                    wasserstein_power,
-                    max_bids_per_round,
-                    gamma_threshold,
-                    diag_first,
-                    batch_size);
-        }
-#endif
-
-        plot_logger_file_name = log_filename_prefix + "_plot.txt";
-        plot_logger = spdlog::get(plot_logger_name);
-        if (not plot_logger) {
-            plot_logger = spdlog::basic_logger_st(plot_logger_name, plot_logger_file_name);
-        }
-        plot_logger->info("New plot starts here, diagram size = {0}, gamma_threshold = {1}, epsilon_common_ratio = {2}",
-                          bidders.size(),
-                          gamma_threshold,
-                          epsilon_common_ratio);
-        plot_logger->set_pattern("%v");
-
-        price_stat_logger_file_name = log_filename_prefix + "_price_change_stat";
-        price_stat_logger = spdlog::get(price_state_logger_name);
-        if (not price_stat_logger) {
-            price_stat_logger = spdlog::basic_logger_st(price_state_logger_name,
-                                                        price_stat_logger_file_name);
-        }
-        price_stat_logger->info(
-                "New price statistics starts here, diagram size = {0}, gamma_threshold = {1}, epsilon_common_ratio = {2}",
-                bidders.size(),
-                gamma_threshold,
-                epsilon_common_ratio);
-        price_stat_logger->set_pattern("%v");
-#endif
     }
 
 #ifndef WASSERSTEIN_PURE_GEOM

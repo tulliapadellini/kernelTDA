@@ -196,7 +196,6 @@ private:
     std::unordered_set<size_t> never_assigned_bidders;
     std::unordered_set<size_t> never_assigned_items;
 
-    std::shared_ptr<spdlog::logger> console_logger;
 #ifdef LOG_AUCTION
     std::unordered_set<size_t> unassigned_normal_bidders;
     std::unordered_set<size_t> unassigned_diag_bidders;
@@ -258,10 +257,6 @@ private:
     std::string forward_price_stat_logger_file_name;
     std::string reverse_price_stat_logger_file_name;
 
-    std::shared_ptr<spdlog::logger> forward_plot_logger;
-    std::shared_ptr<spdlog::logger> reverse_plot_logger;
-    std::shared_ptr<spdlog::logger> forward_price_stat_logger;
-    std::shared_ptr<spdlog::logger> reverse_price_stat_logger;
 
 
     size_t parallel_threshold = 5000;

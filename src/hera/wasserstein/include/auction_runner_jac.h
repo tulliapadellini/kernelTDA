@@ -172,50 +172,7 @@ public:
     std::string log_filename_prefix;
     const Real k_max_relative_error = 2.0; // if relative error cannot be estimated or is too large, use this value
 
-#ifdef LOG_AUCTION
 
-    size_t parallel_threshold { 5000 };
-    bool is_step_parallel {false};
-    std::unordered_set<size_t> unassigned_items;
-    std::unordered_set<size_t> unassigned_normal_items;
-    std::unordered_set<size_t> unassigned_diag_items;
-    std::unordered_set<size_t> never_assigned_bidders;
-    size_t all_assigned_round { 0 };
-    size_t all_assigned_round_found { false };
-
-    int num_rounds_non_cumulative { 0 }; // set to 0 in the beginning of each phase
-    int num_diag_assignments { 0 };
-    int num_diag_assignments_non_cumulative { 0 };
-    int num_diag_bids_submitted { 0 };
-    int num_diag_stole_from_diag { 0 };
-    int num_normal_assignments { 0 };
-    int num_normal_assignments_non_cumulative { 0 };
-    int num_normal_bids_submitted { 0 };
-
-    std::vector<std::vector<size_t>> price_change_cnt_vec;
-
-
-    const char* plot_logger_name = "plot_logger";
-    const char* price_state_logger_name = "price_stat_logger";
-    std::string plot_logger_file_name;
-    std::string price_stat_logger_file_name;
-    std::shared_ptr<spdlog::logger> plot_logger;
-    std::shared_ptr<spdlog::logger> price_stat_logger;
-    std::shared_ptr<spdlog::logger> console_logger;
-
-
-    int num_parallel_bids { 0 };
-    int num_total_bids { 0 };
-
-    int num_parallel_diag_bids { 0 };
-    int num_total_diag_bids { 0 };
-
-    int num_parallel_normal_bids { 0 };
-    int num_total_normal_bids { 0 };
-
-    int num_parallel_assignments { 0 };
-    int num_total_assignments { 0 };
-#endif
 
 }; // AuctionRunnerJac
 
