@@ -22,7 +22,7 @@ specifically:
     Images](http://www.jmlr.org/papers/volume18/16-337/16-337.pdf)
 
 
-Here you can also find an `R` interface to the C++ libray
+Here you can also find an `R` interface to the C++ library
 [HERA](https://bitbucket.org/grey_narn/hera/src/master/), which contains
 an efficient implementation of the L_p q-Wasserstein distance
 between persistence diagrams.
