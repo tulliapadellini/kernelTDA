@@ -29,19 +29,20 @@ The implementation of the solver is a modified version of the popular C++ librar
 heavily relies on the `R`-package \pkg{e1701}.
 }
 \examples{
-## DO NOT RUN:
-# library(TDA)
-# set.seed(123)
-# foo.data = list()
-# for(i in 1:20){
-#    foo = circleUnif(100)
-#    foo.data[[i]] = ripsDiag(foo, 1,1)$diagram}
-#    for(i in 21:40){   
-#     foo = cbind(runif(100), runif(100))
-#     foo.data[[i]] = ripsDiag(foo, 1,1)$diagram
-#     }
-# GSWkernel = gaus.kernel(foo.data, h =1, dimension = 1,  q = 2)
-# GGKclass = krein.svm(kernelmat = GSWkernel, y = rep(c(1,2), c(20,20)))
+\donttest{
+library(TDA)
+set.seed(123)
+foo.data = list()
+for(i in 1:20){
+foo = circleUnif(100)
+foo.data[[i]] = ripsDiag(foo, 1,1)$diagram}
+for(i in 21:40){
+foo = cbind(runif(100), runif(100))
+foo.data[[i]] = ripsDiag(foo, 1,1)$diagram
+}
+GSWkernel = gaus.kernel(foo.data, h =1, dimension = 1,  q = 2)
+GGKclass = krein.svm(kernelmat = GSWkernel, y = rep(c(1,2), c(20,20)))
+}
 }
 \references{
 \insertRef{loosli2015learning}{kernelTDA}

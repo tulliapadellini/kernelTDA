@@ -1287,6 +1287,8 @@ public:
 	Gpos= new MatrixXd(prob.l,prob.l);
 	MatrixXd G(prob.l,prob.l); 
 	
+	l = prob.l;
+	
 	for (int i = 0; i < prob.l; i++)
 	  for (int j = 0; j < prob.l; j++)
 	    G(i,j) = (Qfloat)(y[i]*y[j]*(this->*kernel_function)(i,j));
@@ -1302,12 +1304,21 @@ public:
 	for (int i = 0; i < prob.l; i++) 
 	  D(i,i) = eigenvals(i, 0);
 	
+	bool checkPos = false;
+	
 	// eigenvalues all positives
 	for (int i = 0; i < prob.l; i++)
-	  if (D(i,i) < 0)
+	  if (D(i,i) < -1.0e-6) {
+	    checkPos = true;
 	    D(i,i) = -D(i,i);
+	  }
 	  
-	  MatrixXd result = eigenvecs * D * eigenvecs.inverse();
+	  MatrixXd result;
+	  
+	  if(checkPos) 
+	    result = eigenvecs * D * eigenvecs.inverse();
+	  else
+	    result = G;
 	  
 	  // it copies the content of matrix result into Gpos
 	  Gpos->operator=(result);
@@ -1318,6 +1329,8 @@ public:
 	Qfloat *get_Q(int i, int len) const
 	{
 		Qfloat *data;
+	  
+	  l;
 		int start;
 		if((start = cache->get_data(i,&data,len)) < len)
 		{
@@ -1353,6 +1366,7 @@ private:
 	Cache *cache;
 	double *QD;
 	MatrixXd *Gpos;
+	int l;
 };
 
 class ONE_CLASS_Q: public Kernel
@@ -3257,18 +3271,28 @@ public:
     MatrixXd D = MatrixXd::Zero(prob.l,prob.l);
     
     // creating diagonal matrix of eigenvalues
-    for (int i = 0; i < 3; i++) 
+    for (int i = 0; i < prob.l; i++) 
       D(i,i) = eigenvals(i, 0);
     
+    bool checkPos = false;
+    
     // eigenvalues all positives
-    for (int i = 0; i < 3; i++)
-      if (D(i,i) < 0)
+    for (int i = 0; i < prob.l; i++)
+      if (D(i,i) < -1.0e-6) {
+        checkPos = true;
         D(i,i) = -D(i,i);
-      
-      MatrixXd result = eigenvecs * D * eigenvecs.inverse();
-      
-      // it copies the content of matrix result into Gpos
+      }
+        
+      MatrixXd result;
+        
+      if(checkPos) 
+        result = eigenvecs * D * eigenvecs.inverse();
+      else
+        result = G;
+        
+        // it copies the content of matrix result into Gpos
       Gpos->operator=(result);
+      
   }
   
   Qfloat *get_Q(int i, int len) const
