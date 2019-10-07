@@ -7,8 +7,8 @@
 
 <!-- badges: end -->
 
-This `R`-package provides an implementation of the most famous kernels
-found in the framework of Topological Data Analysis (TDA), more
+This `R`-package provides an implementation of the Geodesic Topological Kernels defined in [Supervised Learning with indefinite topological Kernels](https://arxiv.org/abs/1709.07100), as well the most famous kernels
+present in the framework of Topological Data Analysis (TDA), more
 specifically:
 
   - [Persistence Scale Space
