@@ -159,7 +159,7 @@ function (kernelmat   = NULL,
     # if (kernel > 10) stop("wrong kernel specification!")
 
 #    if (nrow(x) != ncol(x)) stop("kernel matrix must be squared")
-    if(kernel == 4) x = cbind(1:nrow(x), x)
+   if(kernel == 4) x = cbind(1:nrow(x), x)
     xhold   <- if (fitted) x else NULL
     
     nac <- attr(x, "na.action")
@@ -379,6 +379,8 @@ function (object, newdata,
     if (missing(newdata))
         return(fitted(object))
 
+    newdata = cbind(1:nrow(newdata), newdata)
+    
     if (object$tot.nSV < 1)
         stop("Model is empty!")
 
@@ -398,6 +400,7 @@ function (object, newdata,
                       dimension = c(newdata$nrow, newdata$ncol))
    }
 
+    
     sparse <- inherits(newdata, "matrix.csr")
     if (object$sparse || sparse)
         loadNamespace("SparseM")
@@ -436,8 +439,8 @@ function (object, newdata,
                   scale  = object$x.scale$"scaled:scale"
                   )
 
-    if (ncol(object$SV) != ncol(newdata))
-        stop ("test data does not match model !")
+    # if (ncol(object$SV) != ncol(newdata))
+    #     stop ("test data does not match model !")
 
     ret <- svmpredict_R(
                as.integer (decision.values),

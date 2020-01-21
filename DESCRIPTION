@@ -31,6 +31,6 @@ Suggests:
     kernlab,
     viridis
 LinkingTo: Rcpp, RcppEigen, BH
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 VignetteBuilder: knitr
 RdMacros: Rdpack
