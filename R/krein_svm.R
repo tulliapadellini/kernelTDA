@@ -635,7 +635,7 @@ predict.krein.svm <-
     
     predres <- apply(votematrix, 2, which.max)
    # return(votematrix)
-    return(as.factor(ylev[predres]))
+    return(as.factor(ylev[predres], levels(levelsTOT)))
 
     
 
