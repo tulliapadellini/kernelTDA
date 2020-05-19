@@ -4,9 +4,17 @@
 \alias{krein.svm.default}
 \title{Krein Support Vector Machine}
 \usage{
-\method{krein.svm}{default}(kernelmat = NULL, y = NULL, cost = 1,
-  class.weights = NULL, cross = 0, probability = FALSE,
-  fitted = TRUE, subset, ...)
+\method{krein.svm}{default}(
+  kernelmat = NULL,
+  y = NULL,
+  cost = 1,
+  class.weights = NULL,
+  cross = 0,
+  probability = FALSE,
+  fitted = TRUE,
+  subset,
+  ...
+)
 }
 \arguments{
 \item{kernelmat}{the kernel matrix computed for all observations}

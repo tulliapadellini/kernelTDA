@@ -3,7 +3,6 @@
 \docType{package}
 \name{kernelTDA}
 \alias{kernelTDA}
-\alias{kernelTDA-package}
 \title{kernelTDA: Kernels for Persistence Diagrams}
 \description{
 The kerenelTDA package provides implementation for the most common kernels defined 

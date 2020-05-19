@@ -357,6 +357,7 @@ krein.svm.default <-
     
     
     x = kernelmat
+    y <- as.factor(y)
     y.p <- as.integer(y)
     nclass <-  length(unique(y.p))
     indexes <- lapply(sort(unique(y.p)), function(kk) which(y.p == kk))
@@ -635,7 +636,7 @@ predict.krein.svm <-
     
     predres <- apply(votematrix, 2, which.max)
    # return(votematrix)
-    return(as.factor(ylev[predres], levels(levelsTOT)))
+    return(factor(ylev[predres], levels = ylev))
 
     
 

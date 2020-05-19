@@ -1330,7 +1330,7 @@ public:
 	{
 		Qfloat *data;
 	  
-	  l;
+//	  l;
 		int start;
 		if((start = cache->get_data(i,&data,len)) < len)
 		{
